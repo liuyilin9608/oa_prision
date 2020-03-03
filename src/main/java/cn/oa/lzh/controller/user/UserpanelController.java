@@ -38,7 +38,6 @@ import cn.oa.lzh.model.dao.processdao.NotepaperDao;
 import cn.oa.lzh.model.dao.user.DeptDao;
 import cn.oa.lzh.model.dao.user.PositionDao;
 import cn.oa.lzh.model.dao.user.UserDao;
-import cn.oa.lzh.model.entity.mail.Mailreciver;
 import cn.oa.lzh.model.entity.process.Notepaper;
 import cn.oa.lzh.model.entity.user.User;
 import cn.oa.lzh.services.user.NotepaperService;
