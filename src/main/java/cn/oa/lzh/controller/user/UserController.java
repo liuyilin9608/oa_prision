@@ -2,6 +2,8 @@ package cn.oa.lzh.controller.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cn.oa.lzh.model.dao.roledao.RoleDao;
 import cn.oa.lzh.model.dao.user.DeptDao;
 import cn.oa.lzh.model.dao.user.PositionDao;
@@ -10,6 +12,7 @@ import cn.oa.lzh.model.entity.role.Role;
 import cn.oa.lzh.model.entity.user.Dept;
 import cn.oa.lzh.model.entity.user.Position;
 import cn.oa.lzh.model.entity.user.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.github.pagehelper.util.StringUtil;
 import com.github.stuxuhai.jpinyin.PinyinException;
@@ -184,5 +188,54 @@ public class UserController {
 			@RequestParam("selectdeptid") Long deptid) {
 		return pdao.findByDeptidAndNameNotLike(deptid, "%经理");
 	}
-
+	
+	/**
+	 * 用户姓名查找
+	 */
+	@RequestMapping("names")
+	public String serch(Model model,HttpServletRequest req, @SessionAttribute("userId") Long userId,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size){
+		Pageable pa=new PageRequest(page, size);
+		String name=null;
+		String qufen=null;
+		Page<User> pageuser=null;
+		List<User> userlist=null;
+		
+		if(!StringUtil.isEmpty(req.getParameter("title"))){
+			name=req.getParameter("title").trim();
+		}
+		if(!StringUtil.isEmpty(req.getParameter("qufen"))){
+			qufen=req.getParameter("qufen").trim();
+			
+			System.out.println("111");
+			if(StringUtil.isEmpty(name)){
+				// 查询部门下面的员工
+				pageuser = udao.findByFatherId(userId,pa);
+			}else{
+				// 查询名字模糊查询员工
+				pageuser = udao.findbyFatherId(name,userId,pa);
+			}
+			
+		}else{
+			System.out.println("222");
+			if(StringUtil.isEmpty(name)){
+				//查看用户并分页
+				pageuser=udao.findAll(pa);
+			}else{
+				pageuser=udao.findbyUserNameLike(name, pa);
+			}
+		}
+		userlist=pageuser.getContent();
+		// 查询部门表
+		Iterable<Dept> deptlist = ddao.findAll();
+		// 查职位表
+		Iterable<Position> poslist = pdao.findAll();
+		model.addAttribute("emplist", userlist);
+		model.addAttribute("page", pageuser);
+		model.addAttribute("deptlist", deptlist);
+		model.addAttribute("poslist", poslist);
+		model.addAttribute("url", "names");	
+		return "common/recivers";
+	}
 }
