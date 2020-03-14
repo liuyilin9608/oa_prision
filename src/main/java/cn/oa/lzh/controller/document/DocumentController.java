@@ -22,6 +22,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +44,7 @@ import cn.oa.lzh.model.dao.system.StatusDao;
 import cn.oa.lzh.model.dao.system.TypeDao;
 import cn.oa.lzh.model.dao.user.UserDao;
 import cn.oa.lzh.model.dao.user.UserService;
+import cn.oa.lzh.model.entity.attendce.Prision;
 import cn.oa.lzh.model.entity.document.Document;
 import cn.oa.lzh.model.entity.note.Attachment;
 import cn.oa.lzh.model.entity.process.AubUser;
@@ -328,7 +332,27 @@ public class DocumentController {
 		}
 		return "redirect:/verifydocument";
 	}
-
+	/**
+	 * 公文展示
+	 */
+	@RequestMapping("showdocument")
+	public String showDocument(@SessionAttribute("userId") Long userId,
+			Model model,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size) {
+		System.out.println("当前用户Id：" + userId);
+		Pageable p = new PageRequest(page, size);
+		// 通过用户Id去查询流程信息
+		Page<ProcessList> pageList = proDao.findByStatus(p);
+		List<ProcessList> proList = pageList.getContent();
+		// 查询流程状态
+		Iterable<SystemStatusList> status = sDao.findByStatusModel("process");
+		model.addAttribute("statusname", status);
+		model.addAttribute("page", pageList);
+		model.addAttribute("prolist", proList);
+		model.addAttribute("url", "auditor");
+		return "document/documentmanage";
+	}
 	/**
 	 * 下载操作
 	 */

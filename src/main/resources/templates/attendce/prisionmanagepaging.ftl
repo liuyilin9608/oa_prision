@@ -35,6 +35,7 @@
 					<th scope="col">健康</th>
 					<th scope="col">学习</th>
 					<th scope="col">劳动</th>
+					<th scope="col">操作</th>
 				</tr>
 				<#list prisions as prision>
 					<tr>

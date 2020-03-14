@@ -14,6 +14,9 @@ public interface ProcessListDao extends PagingAndSortingRepository<ProcessList, 
 	//根据申请人查找流程 
 	@Query("select pro from ProcessList as pro where pro.userId.userId=?1 order by pro.applyTime desc")
 	Page<ProcessList> findByuserId(Long userid,Pageable pa);
+	
+	@Query("select pro from ProcessList as pro where pro.statusId=25 order by pro.endTime desc")
+	Page<ProcessList> findByStatus(Pageable pa);
 
 	//根据申请人和审核人查找流程
 	@Query(nativeQuery=true,value="select * from aoa_process_list  where aoa_process_list.process_user_id=?1 ORDER BY aoa_process_list.apply_time DESC LIMIT 0,3")
