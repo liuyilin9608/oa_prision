@@ -50,7 +50,7 @@ public class ProcessList{
 	@Column(name="is_checked")
 	private Boolean  rejected=false;		//流程是否被驳回
 	
-	@Column(name="start_time")
+	@Column(name="start_time")	
 	private Date startTime;			//流程开始时间
 	
 	@Column(name="end_time")

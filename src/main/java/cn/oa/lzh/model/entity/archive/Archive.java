@@ -61,17 +61,14 @@ public class Archive{
 	@Column(name="norm")
 	private String norm;
 
-	@Column(name="begin_time")
-	private Date beginTime;
-
-	@Column(name="end_time")
-	private Date endTime;
-
 	@Column(name="keyword")
 	private String keyword;
 
 	@Column(name="input_time")
 	private Date inputTime;
+	
+	@Column(name = "is_lock")
+	private int isLock;
 
 	public Long getArchId() {
 		return archId;
@@ -201,22 +198,6 @@ public class Archive{
 		this.norm = norm;
 	}
 
-	public Date getBeginTime() {
-		return beginTime;
-	}
-
-	public void setBeginTime(Date beginTime) {
-		this.beginTime = beginTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
 	public String getKeyword() {
 		return keyword;
 	}
@@ -233,6 +214,14 @@ public class Archive{
 		this.inputTime = inputTime;
 	}
 
+	public int getIsLock() {
+		return isLock;
+	}
+
+	public void setIsLock(int isLock) {
+		this.isLock = isLock;
+	}
+
 	@Override
 	public String toString() {
 		return "Archive [archId=" + archId + ", title=" + title + ", subtitle="
@@ -241,32 +230,7 @@ public class Archive{
 				+ entityno + ", archno=" + archno + ", retention=" + retention
 				+ ", securityLevel=" + securityLevel + ", note=" + note
 				+ ", firstResp=" + firstResp + ", otherResp=" + otherResp
-				+ ", page=" + page + ", norm=" + norm + ", beginTime="
-				+ beginTime + ", endTime=" + endTime + ", keyword=" + keyword
-				+ ", inputTime=" + inputTime + "]";
+				+ ", page=" + page + ", norm=" + norm + ", keyword=" + keyword
+				+ ", inputTime=" + inputTime + ", isLock=" + isLock + "]";
 	}
-	
-	
 }
-	
-
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-

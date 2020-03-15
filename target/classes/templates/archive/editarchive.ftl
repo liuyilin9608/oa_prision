@@ -14,11 +14,11 @@ a:hover {
 </style>
 <div class="row" style="padding-top: 10px;">
 	<div class="col-md-2">
-		<h1 style="font-size: 24px; margin: 0;" class="">犯人管理</h1>
+		<h1 style="font-size: 24px; margin: 0;" class="">档案管理</h1>
 	</div>
 	<div class="col-md-10 text-right">
 		<a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-			disabled="disabled">犯人管理</a>
+			disabled="disabled">档案管理</a>
 	</div>
 </div>
 <div class="row" style="padding-top: 15px;">
@@ -26,7 +26,7 @@ a:hover {
 		<!--id="container"-->
 		<div class="bgc-w box">
 			<!--盒子头-->
-			<form action="prisionedit" method="post" onsubmit="return check();">
+			<form action="archiveedit" method="post" onsubmit="return check();">
 				<div class="box-header">
 					<h3 class="box-title">
 						<a href="javascript:history.back();" class="label label-default" style="padding: 5px;">
@@ -45,67 +45,76 @@ a:hover {
 						<div class="row">				
 						
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>犯人姓名</span></label> <input
-									name="prisionName" class="form-control usernameonliy" value="${(prision.prisionName)!''}"/>
+								<label class="control-label"><span>正题名</span></label> <input
+									name="title" class="form-control usernameonliy" value="${(archive.title)!''}"/>
 									
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>监区号</span></label> <input
-									name="prisionArea" class="form-control" value="${(prision.prisionArea)!''}"/>
+								<label class="control-label"><span>副题名</span></label> <input
+									name="subtitle" class="form-control" value="${(archive.subtitle)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>囚房号</span></label> <input
-									name="prisionRoom" class="form-control" value="${(prision.prisionRoom)!''}"/>
+								<label class="control-label"><span>信息分类号</span></label> <input
+									name="classno" class="form-control" value="${(archive.classno)!''}"/>
+							</div>
+		
+							<div class="col-md-6 form-group">
+								<label class="control-label"><span>管室代号</span></label> <input
+									name="roomno" class="form-control" value="${(archive.roomno)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"> <span>性别</span>
-								</label> <select class="form-control" name="sex" value="${(prision.sex)!''}">
-									<option value="男">男</option>
-									<option value="女">女</option>
-								</select>
+								<label class="control-label"><span>全宗号</span></label> <input
+									name="totelno" class="form-control" value="${(archive.totelno)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>出生日期</span></label> <input
-									name="birthday" class="form-control" onclick="WdatePicker()" value="${(prision.birthday)!''}"/>
+								<label class="control-label"><span>微缩号</span></label> <input
+									name="minino" class="form-control" value="${(archive.minino)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>入狱日期</span></label> <input
-									name="intime" class="form-control" onclick="WdatePicker()" value="${(prision.intime)!''}"/>
+								<label class="control-label"><span>实体分类号</span></label> <input
+									name="entityno" class="form-control" value="${(archive.entityno)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>罪行</span></label> <input
-									name="inreason" class="form-control" value="${(prision.inreason)!''}"/>
+								<label class="control-label"><span>案卷号</span></label> <input
+									name="archno" class="form-control" value="${(archive.archno)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>原刑期</span></label> <input
-									name="prisionTermOld" class="form-control" value="${(prision.prisionTermOld)!''}"/>
+								<label class="control-label"><span>保管期限</span></label> <input
+									name="retention" class="form-control" value="${(archive.retention)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>现刑期</span></label> <input
-									name="prisionTermNew" class="form-control" value="${(prision.prisionTermNew)!''}"/>
+								<label class="control-label"><span>加密级别</span></label> <input
+									name="securityLevel" class="form-control" value="${(archive.securityLevel)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>刑期变更原因</span></label> <input
-									name="changeReason" class="form-control" value="${(prision.changeReason)!''}"/>
+								<label class="control-label"><span>附注</span></label> <input
+									name="note" class="form-control" value="${(archive.note)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>近期健康情况</span></label> <input
-									name="health" class="form-control" value="${(prision.health)!''}"/>
+								<label class="control-label"><span>第一责任者</span></label> <input
+									name="firstResp" class="form-control" value="${(archive.firstResp)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>近期学习情况</span></label> <input
-									name="education" class="form-control" value="${(prision.education)!''}"/>
+								<label class="control-label"><span>其他责任者</span></label> <input
+									name="otherResp" class="form-control" value="${(archive.otherResp)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>近期劳动情况</span></label> <input
-									name="work" class="form-control" value="${(prision.work)!''}"/>
+								<label class="control-label"><span>页数</span></label> <input
+									name="page" class="form-control" value="${(archive.page)!''}"/>
 							</div>
 							<div class="col-md-6 form-group">
-								<label class="control-label"><span>其它备注</span></label> <input
-									name="remark" class="form-control" value="${(prision.remark)!''}"/>
+								<label class="control-label"><span>规格</span></label> <input
+									name="norm" class="form-control" value="${(archive.norm)!''}"/>
 							</div>
-							
-							<input type="hidden" name="prisionId" value="${(prision.prisionId)!''}"/>
+							<div class="col-md-6 form-group">
+								<label class="control-label"><span>主题词</span></label> <input
+									name="keyword" class="form-control" value="${(archive.keyword)!''}"/>
+							</div>
+							<div class="col-md-6 form-group">
+								<label class="control-label"><span>存档日期</span></label> <input
+									name="inputTime" class="form-control" onclick="WdatePicker()" value="${(archive.inputTime)!''}"/>
+							</div>
+							<input type="hidden" name="archId" value="${(archive.archId)!''}"/>
 						</div>
 	
 					</div>
@@ -123,7 +132,7 @@ a:hover {
 <script type="text/javascript">
 $(".usernameonliy").on("blur",function(){
 	console.log("改变了！！~~");
-	$.post("useronlyname",{"prisionName":$(this).val()},function(data){
+	$.post("useronlyname",{"title":$(this).val()},function(data){
 		console.log(data);
 		$(".usernameonliyvalue").val(data);
 	});
@@ -148,7 +157,7 @@ function check() {
 		// 如果在这些input框中，判断是否能够为空
 		if ($(this).val() == "") {
 			// 排除哪些字段是可以为空的，在这里排除
-			if (index == 9 || index == 10 || index == 11 || index == 12 || index == 13 || index == 14) {
+			if (index == 4 || index == 5 || index == 6 || index == 10 || index == 12 || index == 14) {
 				return true;
 			}
 			// 获取到input框的兄弟的文本信息，并对应提醒；
