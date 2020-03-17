@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.util.StringUtil;
 
+import cn.oa.lzh.model.dao.archive.ArchiveBorrowDao;
 import cn.oa.lzh.model.dao.attendcedao.PrisionDao;
 import cn.oa.lzh.model.dao.document.DocumentDao;
 import cn.oa.lzh.model.dao.notedao.AttachmentDao;
@@ -44,6 +45,7 @@ import cn.oa.lzh.model.dao.system.StatusDao;
 import cn.oa.lzh.model.dao.system.TypeDao;
 import cn.oa.lzh.model.dao.user.UserDao;
 import cn.oa.lzh.model.dao.user.UserService;
+import cn.oa.lzh.model.entity.archive.ArchiveBorrow;
 import cn.oa.lzh.model.entity.attendce.Prision;
 import cn.oa.lzh.model.entity.document.Document;
 import cn.oa.lzh.model.entity.note.Attachment;
@@ -71,6 +73,8 @@ public class DocumentController {
 	private ProcessListDao proDao;
 	@Autowired
 	private ReviewedDao reDao;
+	@Autowired
+	private ArchiveBorrowDao abDao;
 	@Autowired
 	private ProcessService processService;
 	@Autowired
@@ -131,7 +135,7 @@ public class DocumentController {
 		System.out.println("当前用户Id：" + userId);
 		Pageable p = new PageRequest(page, size);
 		// 通过用户Id去查询流程信息
-		Page<ProcessList> pageList = proDao.findByuserId(userId, p);
+		Page<ProcessList> pageList = proDao.findDocByuserId(userId, p);
 		List<ProcessList> proList = pageList.getContent();
 		// 查询流程状态
 		Iterable<SystemStatusList> status = sDao.findByStatusModel("process");
@@ -142,15 +146,15 @@ public class DocumentController {
 		model.addAttribute("typename", type);
 		model.addAttribute("page", pageList);
 		model.addAttribute("prolist", proList);
-		model.addAttribute("url", "auditor");
+		model.addAttribute("url", "apply");
 		return "document/mydocument";
 	}
 
 	/**
 	 * 申请人查看流程条件查询
 	 */
-	@RequestMapping("auditor")
-	public String ser(@SessionAttribute("userId") Long userId, Model model,
+	@RequestMapping("apply")
+	public String apply(@SessionAttribute("userId") Long userId, Model model,
 			HttpServletRequest req,
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "size", defaultValue = "10") int size) {
@@ -166,15 +170,15 @@ public class DocumentController {
 				"process", val);
 		if (StringUtil.isEmpty(val)) {
 			// 空查询
-			pagelist = proDao.findByuserId(userId, pa);
+			pagelist = proDao.findDocByuserId(userId, pa);
 		} else if (!Objects.isNull(status)) {
 			// 根据状态和申请人查找流程
-			pagelist = proDao.findByuserIdandstatus(userId,
+			pagelist = proDao.findDocByuserIdandstatus(userId,
 					status.getStatusId(), pa);
 			model.addAttribute("sort", "&val=" + val);
 		} else {
 			// 根据审核人，类型，标题模糊查询
-			pagelist = proDao.findByuserIdandstr(userId, val, pa);
+			pagelist = proDao.findDocByuserIdandstr(userId, val, pa);
 			model.addAttribute("sort", "&val=" + val);
 		}
 		prolist = pagelist.getContent();
@@ -185,8 +189,8 @@ public class DocumentController {
 		model.addAttribute("page", pagelist);
 		model.addAttribute("prolist", prolist);
 		model.addAttribute("statusname", statusname);
-		model.addAttribute("url", "auditor");
-		return "process/managetable";
+		model.addAttribute("url", "apply");
+		return "document/managetable";
 	}
 
 	/**
@@ -200,15 +204,38 @@ public class DocumentController {
 		System.out.println("审核用户ID：" + userId);
 		User user = userDao.findOne(userId);
 		System.out.println("用户信息：" + user);
-		Page<AubUser> pageList = processService.verify(user, page, size, null,
-				model);
-		List<Map<String, Object>> proList = processService.verifyDocument(
-				pageList, user);
+		Page<AubUser> pageList = processService.verifyDoc(user, page, size,
+				null, model);
+		List<Map<String, Object>> proList = processService.verifyData(pageList,
+				user);
 		System.out.println("审核数据" + proList);
 		model.addAttribute("page", pageList);
 		model.addAttribute("prolist", proList);
-		model.addAttribute("url", "serch");
+		model.addAttribute("url", "auditor");
 		return "document/verifydocument";
+	}
+	
+	@RequestMapping("auditor")
+	public String auditor(@SessionAttribute("userId") Long userId,
+			Model model,HttpServletRequest req,
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "size", defaultValue = "10") int size) {
+		System.out.println("审核用户ID：" + userId);
+		User user = userDao.findOne(userId);
+		System.out.println("用户信息：" + user);
+		String val = null;
+		if (!StringUtil.isEmpty(req.getParameter("val"))) {
+			val = req.getParameter("val");
+		}
+		Page<AubUser> pageList = processService.verifyDoc(user, page, size,
+				val, model);
+		List<Map<String, Object>> proList = processService.verifyData(pageList,
+				user);
+		System.out.println("审核数据" + proList);
+		model.addAttribute("page", pageList);
+		model.addAttribute("prolist", proList);
+		model.addAttribute("url", "auditor");
+		return "document/verify";
 	}
 
 	/**
@@ -241,8 +268,13 @@ public class DocumentController {
 			model.addAttribute("eve", eve);
 			model.addAttribute("map", map);
 			return "document/docserch";
+		} else if (("申请借调档案").equals(type)) {
+			ArchiveBorrow eve = abDao.findByProId(process);
+			model.addAttribute("eve", eve);
+			model.addAttribute("map", map);
+			return "archive/archserch";
 		}
-		return "document/archserch";
+		return "/";
 	}
 
 	/**
@@ -268,7 +300,7 @@ public class DocumentController {
 		model.addAttribute("statusid", process.getStatusId());
 		model.addAttribute("process", process);
 		model.addAttribute("revie", list);
-		model.addAttribute("size", list.size());  //审核次数
+		model.addAttribute("size", list.size()); // 审核次数
 		model.addAttribute("ustatusid", reviewed.getStatusId());
 		model.addAttribute("positionid", user.getPosition().getId());
 		model.addAttribute("typename", typename);
@@ -288,50 +320,81 @@ public class DocumentController {
 		Long proId = Long.parseLong(req.getParameter("proId"));
 		System.out.println("流程Id为" + proId);
 		ProcessList process = proDao.findOne(proId);
-		//获得申请人信息
+		// 获得申请人信息
 		User applyUser = userDao.findOne(process.getUserId().getUserId());
 		System.out.println("申请人信息" + applyUser.toString());
+	
+		if(StringUtil.isEmpty(reviewed.getUsername())){
+			return "index/error";
+		}
+		
 		if (!StringUtil.isEmpty(req.getParameter("liuzhuan"))) {
 			name = req.getParameter("liuzhuan");
 		}
 		System.out.println("审核状态：" + name);
-		//审核并流转
-		if(!StringUtil.isEmpty(name)){
-			//获取下一个审核人
+		// 审核并流转
+		if (!StringUtil.isEmpty(name)) {
+			// 获取下一个审核人
 			User userNext = userDao.findByUserName(reviewed.getUsername());
 			System.out.println("下一个审核人信息：" + userNext);
-			/*if(("新建公文").equals(typename)){*/
-			if(userNext.getUserId().equals(7L)){
-				System.out.println("修改一级审核，创建二级审核，修改流程状态");
-					processService.save(proId, user, reviewed, process, userNext);
-			}else{
+			System.out.println("流程类型：" + typename);
+			System.out.println("下一个审核人Id" + userNext.getUserId());
+			if (("新建公文").equals(typename)) {
+				if (userNext.getUserId().equals(7L)) {
+					System.out.println("修改一级审核，创建二级审核，修改流程状态");
+					processService.save(proId, user, reviewed, process,
+							userNext);
+				} else {
 					model.addAttribute("error", "请选择行政办公室主任。");
-					return "common/proce";	
+					return "common/proce";
+				}
+			} else if (("申请借调档案").equals(typename)) {			
+				if (userNext.getUserId().equals(22L)) {
+					System.out.println("修改一级审核，创建二级审核，修改流程状态");
+					processService.save(proId, user, reviewed, process,
+							userNext);
+				} else {
+					model.addAttribute("error", "请选择档案科科长。");
+					return "common/proce";
+				}
 			}
-		}else{
-			//1.修改审核状态并添加建议
+		} else {
+			// 1.修改审核状态并添加建议
 			Reviewed r = reDao.findByProIdAndUserId(proId, user);
 			r.setAdvice(reviewed.getAdvice());
 			r.setStatusId(reviewed.getStatusId());
 			r.setReviewedTime(new Date());
 			reDao.save(r);
-			//2.修改流程状态
+			// 2.修改流程状态
 			process.setStatusId(reviewed.getStatusId());
 			proDao.save(process);
 		}
-		if("创建公文".equals(typename)){
+		if ("创建公文".equals(typename)) {
 			Document doc = docDao.findByProId(process);
-			if(applyUser.getFatherId().equals(user.getUserId())){
+			if (applyUser.getFatherId().equals(user.getUserId())) {
 				doc.setManagerAdvice(reviewed.getAdvice());
 				docDao.save(doc);
 			}
-			if(user.getPosition().getId().equals(7L)){
+			if (user.getPosition().getId().equals(7L)) {
 				doc.setAdminAdvice(reviewed.getAdvice());
 				docDao.save(doc);
 			}
+			return "redirect:/verifydocument";
+		}else if("申请借调档案".equals(typename)){
+			ArchiveBorrow arch = abDao.findByProId(process);
+			if (applyUser.getFatherId().equals(user.getUserId())) {
+				arch.setManagerAdvice(reviewed.getAdvice());
+				abDao.save(arch);
+			}
+			if (user.getPosition().getId().equals(22L)) {
+				arch.setArchAdvice(reviewed.getAdvice());
+				abDao.save(arch);
+			}
+			return "redirect:/verifyarchives";
 		}
-		return "redirect:/verifydocument";
+		return "/";
 	}
+
 	/**
 	 * 公文展示
 	 */
@@ -343,16 +406,17 @@ public class DocumentController {
 		System.out.println("当前用户Id：" + userId);
 		Pageable p = new PageRequest(page, size);
 		// 通过用户Id去查询流程信息
-		Page<ProcessList> pageList = proDao.findByStatus(p);
+		Page<ProcessList> pageList = proDao.findDocByStatus(p);
 		List<ProcessList> proList = pageList.getContent();
 		// 查询流程状态
 		Iterable<SystemStatusList> status = sDao.findByStatusModel("process");
 		model.addAttribute("statusname", status);
 		model.addAttribute("page", pageList);
 		model.addAttribute("prolist", proList);
-		model.addAttribute("url", "auditor");
+		model.addAttribute("url", "showdocument");
 		return "document/documentmanage";
 	}
+
 	/**
 	 * 下载操作
 	 */

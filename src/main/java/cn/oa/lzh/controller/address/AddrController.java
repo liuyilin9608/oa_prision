@@ -37,7 +37,6 @@ import com.github.stuxuhai.jpinyin.PinyinHelper;
 
 import cn.oa.lzh.common.formValid.BindingResultVOUtil;
 import cn.oa.lzh.common.formValid.ResultEnum;
-import cn.oa.lzh.mappers.AddressMapper;
 import cn.oa.lzh.model.dao.address.AddressDao;
 import cn.oa.lzh.model.dao.address.AddressUserDao;
 import cn.oa.lzh.model.dao.notedao.AttachService;
@@ -62,8 +61,6 @@ public class AddrController {
 	UserDao uDao;
 	@Autowired
 	AddreddUserService addressUserService;
-	@Autowired
-	AddressMapper am;
 	@Autowired
 	AddressUserDao auDao;
 	@Autowired
@@ -464,39 +461,7 @@ public class AddrController {
 		return "address/shareuser";
 	}
 
-	/**
-	 外部通讯录
-	 * @return
-	 */
-	@RequestMapping("outaddresspaging")
-	public String outAddress(@RequestParam(value="pageNum",defaultValue="1") int page,Model model,
-							 @RequestParam(value="baseKey",required=false) String baseKey,
-							 @RequestParam(value="outtype",required=false) String outtype,
-							 @RequestParam(value="alph",defaultValue="ALL") String alph,
-							 @SessionAttribute("userId") Long userId
-	){
-		PageHelper.startPage(page, 10);
-		List<Map<String, Object>> directors=am.allDirector(userId, alph, outtype, baseKey);
-		List<Map<String, Object>> adds=addressService.fengzhaung(directors);
-		PageInfo<Map<String, Object>> pageinfo=new PageInfo<>(directors);
-		if(!StringUtils.isEmpty(outtype)){
-			model.addAttribute("outtype", outtype);
-		}
-		Pageable pa=new PageRequest(0, 10);
-
-		Page<User> userspage=uDao.findAll(pa);
-		List<User> users=userspage.getContent();
-		model.addAttribute("modalurl", "modalpaging");
-		model.addAttribute("modalpage", userspage);
-		model.addAttribute("users", users);
-		model.addAttribute("userId", userId);
-		model.addAttribute("baseKey", baseKey);
-		model.addAttribute("directors", adds);
-		model.addAttribute("page", pageinfo);
-		model.addAttribute("url", "outaddresspaging");
-		return "address/outaddrss";
-	}
-
+	
 	/**
 	 * 内部通讯录表格，并处理分页
 	 * @return

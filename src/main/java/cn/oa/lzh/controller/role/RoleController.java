@@ -185,32 +185,4 @@ public class RoleController {
 		}
 		return "redirect:/rolemanage";
 	}
-/**
- * 删除
- */
-	@RequestMapping("deshan")
-	public String index5(HttpServletRequest req,Model model,HttpSession session){
-		String userId = ((String) session.getAttribute("userId")).trim();
-		Long userid = Long.parseLong(userId);
-		User user=udao.findOne(userid);
-		String id=null;
-		if(!StringUtil.isEmpty(req.getParameter("id"))){
-			id=req.getParameter("id");	
-		}
-		Long lid=Long.parseLong(id);
-		if(user.getSuperman().equals(true)){
-			List<User> useist=udao.findrole(lid);
-			if(useist.size()>0){
-				model.addAttribute("error", "此角色下还有职员，不允许删除。");
-				return "common/proce";
-			}else{
-				Role r=rdao.findOne(lid);
-				rdao.delete(r);
-			}
-		}else{
-			model.addAttribute("error", "只有超级管理员才能操作。");
-			return "common/proce";
-		}
-		return null;	
-	}
 }

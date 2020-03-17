@@ -9,5 +9,5 @@ import cn.oa.lzh.model.entity.process.ProcessList;
 
 public interface ArchiveBorrowDao extends PagingAndSortingRepository<ArchiveBorrow, Long>{
 
-	
+	ArchiveBorrow findByProId(ProcessList processList);
 }

@@ -200,7 +200,7 @@ public class ProcessService {
 	 * 
 	 * 条件查询审核信息
 	 */
-	public Page<AubUser> verify(User user,int page,int size,String val,Model model){
+	public Page<AubUser> verifyDoc(User user,int page,int size,String val,Model model){
 		Pageable pa=new PageRequest(page, size);
 		Page<AubUser> pagelist=null;
 		Page<AubUser> pagelist2=null;
@@ -212,18 +212,49 @@ public class ProcessService {
 			orders.add(new Order(Direction.DESC, "applyTime"));
 			Sort sort = new Sort(orders);
 			pa=new PageRequest(page,size,sort);
-			pagelist=redao.findByUserIdOrderByStatusId(user,false, pa);
+			pagelist=redao.findDocByUserIdOrderByStatusId(user,false, pa);
 			System.out.println("分页数据：" + pagelist);
 		}else if(!Objects.isNull(u)){
-			pagelist=redao.findprocesslist(user,u,false,pa);
+			pagelist=redao.findDocprocesslist(user,u,false,pa);
 			model.addAttribute("sort", "&val="+val);
 		}else if(!Objects.isNull(status)){
-			pagelist=redao.findbystatusprocesslist(user,status.getStatusId(),false,pa);
+			pagelist=redao.findDocbystatusprocesslist(user,status.getStatusId(),false,pa);
 			model.addAttribute("sort", "&val="+val);
 		}else{
-			pagelist2=redao.findbytypenameprocesslist(user, val,false, pa);
+			pagelist2=redao.findDocbytypenameprocesslist(user, val,false, pa);
 			if(!pagelist2.hasContent()){
-				pagelist2=redao.findbyprocessnameprocesslist(user, val,false, pa);
+				pagelist2=redao.findDocbyprocessnameprocesslist(user, val,false, pa);
+			}
+			model.addAttribute("sort", "&val="+val);
+			return pagelist2;
+		}
+		return pagelist;
+	}
+	
+	public Page<AubUser> verifyArch(User user,int page,int size,String val,Model model){
+		Pageable pa=new PageRequest(page, size);
+		Page<AubUser> pagelist=null;
+		Page<AubUser> pagelist2=null;
+		List<Order> orders = new ArrayList<>();
+		User u=udao.findByUserName(val);
+		SystemStatusList status=sdao.findByStatusModelAndStatusName("process", val);
+		System.out.println("状态：" + status);
+		if(StringUtil.isEmpty(val)){
+			orders.add(new Order(Direction.DESC, "applyTime"));
+			Sort sort = new Sort(orders);
+			pa=new PageRequest(page,size,sort);
+			pagelist=redao.findArchByUserIdOrderByStatusId(user,false, pa);
+			System.out.println("分页数据：" + pagelist);
+		}else if(!Objects.isNull(u)){
+			pagelist=redao.findArchprocesslist(user,u,false,pa);
+			model.addAttribute("sort", "&val="+val);
+		}else if(!Objects.isNull(status)){
+			pagelist=redao.findArchbystatusprocesslist(user,status.getStatusId(),false,pa);
+			model.addAttribute("sort", "&val="+val);
+		}else{
+			pagelist2=redao.findArchbytypenameprocesslist(user, val,false, pa);
+			if(!pagelist2.hasContent()){
+				pagelist2=redao.findArchbyprocessnameprocesslist(user, val,false, pa);
 			}
 			model.addAttribute("sort", "&val="+val);
 			return pagelist2;
@@ -233,7 +264,7 @@ public class ProcessService {
 	/**
 	 * 审核页数据封装
 	 */
-	public List<Map<String, Object>> verifyDocument(Page<AubUser> page, User user){
+	public List<Map<String, Object>> verifyData(Page<AubUser> page, User user){
 		
 		List<Map<String, Object>> list = new ArrayList<>();
 		List<AubUser> proList = page.getContent();
@@ -380,4 +411,16 @@ public class ProcessService {
 		prodao.save(process);
 	}
 	
+	/**
+	 * 存入档案申请信息
+	 */
+	public void saveArchApply(ProcessList processList, String val, User user, String name, String processName)
+			throws IllegalStateException, IOException {
+		processList.setTypeNmae(val); // 流程申请类型
+		processList.setApplyTime(new Date());
+		processList.setUserId(user);
+		processList.setStatusId(23L); // 流程状态 初始23：未处理
+		processList.setShenuser(name);// 设置审核人
+		processList.setProcessName(processName);
+	}
 }

@@ -50,13 +50,13 @@
         <div class="col-md-3">
             <div class="jichu tongxun">
                 <div class="wenzi">
-                    <h2>${directornum}</h2>
+                    <h2>${usernum}</h2>
                     <p>通讯录</p>
                 </div>
                 <div class="iconfont">
                     <span class="glyphicon glyphicon-earphone"></span>
                 </div>
-                <a href="addrmanage" class="moreduo"> 更多 <span
+                <a href="usermanage" class="moreduo"> 更多 <span
                             class="glyphicon glyphicon-circle-arrow-right"></span>
                 </a>
             </div>

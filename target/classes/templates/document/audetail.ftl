@@ -124,7 +124,7 @@ a:hover {
 					</#if>	
 					</div>
 					<div class="content">		
-					<#if typename=="创建公文" || typename=="借调文档">
+					<#if typename=="创建公文" || typename=="申请借调档案">
 					<p class="pa" style="padding-top: 9px;">开始时间：${(process.startTime)!''}</p>
 					<p class="pa" >结束时间：${(process.endTime)!''}</p>
 					<p class="pa" >申请主题：${(process.processName)!''}</p>
@@ -162,7 +162,7 @@ a:hover {
 			<input type="text" style="display:none;" name="proId" value="${(process.processId)!''}"/>
 			
 			
-				<#if positionid==7>
+				<#if positionid==7 || positionid==15>
 					<input class="btn btn-success" id="save" type="submit" value="审核并结案" />
 				  <#else>
 					<input class="btn btn-info liu" id="saves" type="submit" value="审核并流转" name="liuzhuan" />

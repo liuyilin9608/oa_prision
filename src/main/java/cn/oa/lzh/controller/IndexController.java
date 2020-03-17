@@ -132,8 +132,9 @@ public class IndexController {
 	public String test2(HttpSession session, Model model, HttpServletRequest request) {
 		Long userId = Long.parseLong(session.getAttribute("userId") + "");
 		User user=uDao.findOne(userId);
+		Long userAll = uDao.count();
 		request.setAttribute("user", user);
-		request.setAttribute("directornum", directorDao.count());
+		request.setAttribute("usernum",userAll);
 		return "systemcontrol/control";
 	}
 }

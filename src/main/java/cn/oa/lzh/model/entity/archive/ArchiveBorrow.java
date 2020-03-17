@@ -21,8 +21,11 @@ public class ArchiveBorrow implements Serializable {
 	@Column(name="borrow_id")
 	private Long borrowId;
 
-	@Column(name="type_id")
-	private int typeId;
+	@Column(name="archno")
+	private String archno;
+
+	@Column(name="title")
+	private String title;
 	
 	@Column(name="borrow_days")
 	private int borrowDays;
@@ -33,16 +36,15 @@ public class ArchiveBorrow implements Serializable {
 	@Column(name="arch_advice")
 	private String archAdvice;
 
+	@Column(name="manager_advice")
+	private String managerAdvice;
+	
 	@OneToOne(cascade=CascadeType.ALL)  //流程id
 	@JoinColumn(name="pro_id")
 	private ProcessList proId;
 
 	@Transient
 	private String auditor; //审核人
-
-	public void setProId(ProcessList proId) {
-		this.proId = proId;
-	}
 
 	public Long getBorrowId() {
 		return borrowId;
@@ -52,12 +54,20 @@ public class ArchiveBorrow implements Serializable {
 		this.borrowId = borrowId;
 	}
 
-	public int getTypeId() {
-		return typeId;
+	public String getArchno() {
+		return archno;
 	}
 
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
+	public void setArchno(String archno) {
+		this.archno = archno;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getBorrowDays() {
@@ -84,6 +94,22 @@ public class ArchiveBorrow implements Serializable {
 		this.archAdvice = archAdvice;
 	}
 
+	public String getManagerAdvice() {
+		return managerAdvice;
+	}
+
+	public void setManagerAdvice(String managerAdvice) {
+		this.managerAdvice = managerAdvice;
+	}
+
+	public ProcessList getProId() {
+		return proId;
+	}
+
+	public void setProId(ProcessList proId) {
+		this.proId = proId;
+	}
+
 	public String getAuditor() {
 		return auditor;
 	}
@@ -95,14 +121,12 @@ public class ArchiveBorrow implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 	@Override
 	public String toString() {
-		return "ArchiveBorrow [borrowId=" + borrowId + ", typeId="+ typeId
-				+ ", borrowDays=" + borrowDays + ", borrowReason="
-				+ borrowReason + ", archAdvice=" + archAdvice + ", proId="
+		return "ArchiveBorrow [borrowId=" + borrowId + ", archno=" + archno
+				+ ", title=" + title + ", borrowDays=" + borrowDays
+				+ ", borrowReason=" + borrowReason + ", archAdvice="
+				+ archAdvice + ", managerAdvice=" + managerAdvice + ", proId="
 				+ proId + ", auditor=" + auditor + "]";
 	}
-	
-
 }

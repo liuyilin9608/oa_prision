@@ -71,7 +71,7 @@
 		   $(function(){
 			   $(".chazhao").click(function(){
 				   var con=$(".cha").val();
-				   $(".thistable").load("auditor",{val:con});
+				   $(".thistable").load("apply",{val:con});
 			   });
 		});
 	

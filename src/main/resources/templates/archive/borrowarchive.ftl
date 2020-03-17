@@ -68,23 +68,23 @@ min-height: 120px;
 </style>
 <div class="row" style="padding-top: 10px;">
 	<div class="col-md-2">
-		<h1 style="font-size: 24px; margin: 0;" class="">请假申请</h1>
+		<h1 style="font-size: 24px; margin: 0;" class="">申请借调档案</h1>
 	</div>
 	<div class="col-md-10 text-right">
 		<a href="##"><span class="glyphicon glyphicon-home"></span> 首页</a> > <a
-			disabled="disabled">请假申请</a>
+			disabled="disabled">申请借调档案</a>
 	</div>
 </div>
 <div class="row" style="padding-top: 15px;">
 	<div class="col-md-12">
 		
 		<div class="bgc-w box">
-			<form action="holi" enctype="multipart/form-data" method="post" onsubmit="return check();" >
+			<form action="submitapply"  method="post" onsubmit="return check();" >
 			<div class="box-header">
 				<table class="bo table ">
 			
 				<tr >
-					<td colspan="14" class="title"><h2>请假申请单</h2></td>
+					<td colspan="14" class="title"><h2>申请借调文档</h2></td>
 			
 				</tr>
 				<tr style="opacity: 0;">
@@ -98,31 +98,24 @@ min-height: 120px;
 						<span class="error-mess"></span>
 					</div>
 					</td>
-				</tr>
-					<tr >
-					<td class="title"><label class="control-label">请假说明</label></td>
-					<td  colspan="13">
-						<textarea class="form-control shuoming"  style="background-color:#fff;">
-                                                      公文内容
-         				</textarea>
-					</td>
-				</tr>
+
 				<tr >
-					<td class="title"><label class="control-label">标题</label></td>
-					<td  colspan="6"><input type="text" class="form-control inpu" name="proId.processName"/></td>
-					
-					<td class="title"><span >紧急程度</span></td>
-					<td colspan="6">
-						
-					</td>
-					
+					<td class="title"><label class="control-label">案卷号</label></td>
+					<td  colspan="6"><input type="text" class="form-control inpu" name ="archno" /></td>
+					<td class="title"><label class="control-label">档案标题</label></td>
+					<td  colspan="6"><input type="text" class="form-control inpu" name ="title"  /></td>	
 				</tr>
 				<tr >
 					<td class="title" ><label class="control-label">申请人</label></td>
-					<td  colspan="6"></td>
-					<td class="title" ><label class="control-label">请假类型</label></td>
+					<td  colspan="6"><input type="text" class="form-control inpu"
+					readonly="readonly" style="background-color:#fff;" value="${username}"/></td>
+					<td class="title"><span >紧急程度</span></td>
 					<td colspan="6">
-						
+						<select class="form-control inpu" name="proId.deeply">
+							<#list processType as type>
+							<option value="${type.typeId}">${type.typeName}</option>
+							</#list>
+						</select>
 					</td>
 				</tr>
 				
@@ -132,41 +125,24 @@ min-height: 120px;
 					<td class="title" ><label class="control-label">结束日期</label></td>
 					<td  colspan="6"><input type="text" class="form-control inpu holiend" name="proId.endTime"/></td>
 				</tr>
-					<tr >
-					<td class="title" ><label class="control-label">请假天数</label></td>
-					<td  colspan="6"><input type="text" class="form-control inpu days" name="leaveDays"
-					readonly="readonly" style="background-color:#fff;"/></td>
-					<td class="title" ><label class="control-label">审核人员</label></td>
-					<td  colspan="6"><input name="nameuser" type="text" id="recive_list"
+					<td class="title" ><label class="control-label">借调原因</label></td>
+					<td  colspan="6"><input type="text" class="form-control inpu"  name="borrowReason"/></td>
+					<td class="title"><label class="control-label">借调天数</label></td>
+					<td  colspan="6"><input type="text" class="form-control inpu" name ="borrowDays"  /></td>	
+				</tr>
+				<tr >
+                    <td class="title" ><label class="control-label">审核人员</label></td>
+					<td  colspan="6"><input name="auditor" type="text" id="recive_list"
 								class="form-control " readonly="readonly" style="background-color:#fff;"/>
 							<div class="reciver">
 								<span class="label label-success glyphicon glyphicon-plus"
 									data-toggle="modal" data-target="#myModal">通讯录</span>
 							</div>
 					</td>
-				</tr>
-				
-				<tr >
-					<td class="title" ><label class="control-label">相关资料</label></td>
-					<td  colspan="6">
-						<div class="btn btn-default"style="position: relative; overflow: hidden;width: 100%;
-    							margin-top: -6px;">
-							<i class="glyphicon glyphicon-open"></i> 上传资料
-							<input type="file" name="filePath" style="opacity: 0; position: absolute;
-								 top: 12px; right: 0; " class='inpu'>
-						</div>
-					</td>
-					<td class="title" ><label class="control-label">请假原因</label></td>
-					<td  colspan="6"><textarea class="form-control text"  name="proId.processDescribe"></textarea></td>
-				</tr>
-				<tr >
-
 					<td colspan="14" style="text-align: right;" >
 					<input   type="text" class="day" name="proId.procseeDays" hidden="hidden"/>
-					<input   type="text" value="请假申请" name="val" hidden="hidden"/>
+					<input   type="text" value="申请借调档案" name="val" hidden="hidden"/>
 						<input class="btn btn-primary" id="save" type="submit" value="保存" />
-						<input class="btn btn-default" id="cancel" type="button" value="取消"
-						onclick="window.history.back();" />
 					</td>
 					
 				</tr>

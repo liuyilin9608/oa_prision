@@ -70,7 +70,7 @@
 		   $(function(){
 			   $(".chazhao").click(function(){
 				   var con=$(".cha").val();
-				   $(".thistable").load("serch",{val:con});
+				   $(".thistable").load("auditor",{val:con});
 			   });
 		});
 	
