@@ -101,7 +101,21 @@ public class User {
 	private Long fatherId;		//上司id
 	
 	private Integer holiday;   //请假天数
-    //一个职位多个用户
+	
+	@Column(name="worktype")
+	private String workType;  //上班类型 白/夜
+	
+   
+
+	public String getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(String workType) {
+		this.workType = workType;
+	}
+
+	//一个职位多个用户
 	@ManyToOne()
 	@JoinColumn(name = "position_id")
 	private Position position;	//外键关联 职位表
@@ -439,8 +453,10 @@ public void setSuperman(Boolean superman) {
 				+ birth + ", userSign=" + userSign + ", password=" + password + ", salary=" + salary + ", imgPath="
 				+ imgPath + ", hireTime=" + hireTime + ", isLock=" + isLock + ", lastLoginIp=" + lastLoginIp
 				+ ", lastLoginTime=" + lastLoginTime + ", modifyTime=" + modifyTime + ", modifyUserId=" + modifyUserId
-				+ ", fatherId=" + fatherId + ", holiday=" + holiday + ",superman=" + superman + ",pinyin=" + pinyin + "]";
+				+ ", fatherId=" + fatherId + ", holiday=" + holiday + ",worktype=" + workType + ",superman=" + superman + ",pinyin=" + pinyin + "]";
 	}
+
+	
 	
 	
 	

@@ -142,10 +142,10 @@ a:hover {
 										value="${(user.hireTime)!''}"/>
 								</div>
 							</#if>
-							<!-- <div class="col-md-6 form-group">
+							<div class="col-md-6 form-group">
 								<label class="control-label">生日</label> <input
 									name="birth" class="form-control" id="start" onclick="WdatePicker()" value="${(user.birth)!''}"/>
-							</div> -->
+							</div> 
 							<div class="col-md-6 form-group">
 								<label class="control-label"> <span>皮肤</span>
 								</label> <select class="form-control" name="themeSkin" value="${(user.themeSkin)!''}">
@@ -153,6 +153,17 @@ a:hover {
 									<option value="green">原谅绿</option>
 									<option value="red">姨妈红</option>
 									<option value="yellow">shit黄</option>
+								</select>
+							</div>
+							<div class="col-md-6 form-group">
+								<label class="control-label"> <span>上班类型</span></label> 
+								
+								<select class="form-control" name="workType">
+								    <#if user??>
+										<option value="${(user.userId)!''}">${(user.workType)!''}</option>
+									</#if>
+									<option value="白班">白班</option>
+									<option value="夜班">夜班</option>
 								</select>
 							</div>
 							<input type="hidden" name="userId" value="${(user.userId)!''}"/>
@@ -186,8 +197,6 @@ a:hover {
 				<!--盒子尾-->
 				<div class="box-footer">
 					<input class="btn btn-primary" id="save" type="submit" value="保存" />
-					<input class="btn btn-default" id="cancel" type="submit" value="取消"
-						onclick="window.history.back();" />
 				</div>
 			</form>
 		</div>

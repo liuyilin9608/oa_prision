@@ -11,7 +11,7 @@
 				</h2>
 			</a>
 			<p>
-			点击<span class="glyphicon glyphicon-hand-up"></span>
+			状态<span class="glyphicon glyphicon-hand-up"></span>
 				<#if alist??>
 						${type}
 					<#else>
@@ -31,7 +31,7 @@
 <#if error=='1'>
 	<script>
 	$(function(){
-		alert("亲 不能签到，不在正常签到时间内！");
+		alert("不能签到，不在正常签到时间内！");
 	})
 </script>
 
@@ -39,10 +39,41 @@
 <#if error=='2'>
 	<script>
 	$(function(){
-		alert("亲 还没有到签到时间哦");
+		alert("还没有到签到时间");
 	})
 </script>
 
+</#if>
+<#if error=='3'>
+	<script>
+	$(function(){
+		alert("没有设置该职工的工作类型");
+	})
+</script>
+</#if>
+
+<#if error=='4'>
+	<script>
+	$(function(){
+		alert("已完成今日签到");
+	})
+</script>
+</#if>
+
+<#if error=='5'>
+	<script>
+	$(function(){
+		alert("未到下班签到时间,不要重复上班签到");
+	})
+</script>
+</#if>
+
+<#if error=='6'>
+	<script>
+	$(function(){
+		alert("不要重复下班签到");
+	})
+</script>
 </#if>
 </#if>
 <script>

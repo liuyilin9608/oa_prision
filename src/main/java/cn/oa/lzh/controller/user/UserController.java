@@ -154,6 +154,8 @@ public class UserController {
 			user2.setDept(dept);
 			user2.setRole(role);
 			user2.setPosition(position);
+			user2.setWorkType(user.getWorkType());
+			System.out.println("用户工作类型：" + user.getWorkType());
 			udao.save(user2);
 		}
 
