@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2020-03-19 19:12:56
+Date: 2020-03-20 22:45:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,7 +68,7 @@ CREATE TABLE `archive_borrow` (
   PRIMARY KEY (`borrow_id`),
   KEY `pro_id` (`pro_id`),
   CONSTRAINT `archive_borrow_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `process` (`process_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of archive_borrow
@@ -84,7 +84,10 @@ INSERT INTO `archive_borrow` VALUES ('8', '4', '4', '4', '4', null, null, '24');
 INSERT INTO `archive_borrow` VALUES ('9', '5', '5', '5', '5', null, null, '25');
 INSERT INTO `archive_borrow` VALUES ('10', '6', '6', '6', '6', null, null, '26');
 INSERT INTO `archive_borrow` VALUES ('11', '7', '7', '7', '7', null, null, '27');
-INSERT INTO `archive_borrow` VALUES ('12', '8', '8', '8', '8', null, '', '28');
+INSERT INTO `archive_borrow` VALUES ('12', '8', '8', '8', '8', '2点来取', '', '28');
+INSERT INTO `archive_borrow` VALUES ('13', '222', '22', '2', '22', null, null, '32');
+INSERT INTO `archive_borrow` VALUES ('14', 'iifr', 'p98y9t', '22', 'iuiufu', null, 'iugigi', '36');
+INSERT INTO `archive_borrow` VALUES ('15', '审批流程测试', 'aaa', '11', '有需要', null, '通过', '39');
 
 -- ----------------------------
 -- Table structure for `attachment`
@@ -101,7 +104,7 @@ CREATE TABLE `attachment` (
   `upload_time` datetime DEFAULT NULL,
   `user_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`attachment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of attachment
@@ -113,6 +116,8 @@ INSERT INTO `attachment` VALUES ('4', '英语证明.jpg', '/2020/03/b/ce23b250-c
 INSERT INTO `attachment` VALUES ('5', '学历在线认证.png', '/2020/03/b/8cdff1b7-38e8-413a-95ed-9f190bb17aef.png', 'png', '173736', 'image/png', 'document', '2020-03-13 20:50:17', '3');
 INSERT INTO `attachment` VALUES ('6', '推荐人信息表.doc', '/2020/03/b/8a19efef-f52c-4f31-b259-1edd6e4756f0.doc', 'doc', '59392', 'application/msword', 'document', '2020-03-14 14:21:06', '3');
 INSERT INTO `attachment` VALUES ('7', '健康申报+Health+Declaration.docx', '/2020/03/b/e634b64d-da28-462c-9f63-8e8a2f3c6cf3.docx', 'docx', '20281', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'document', '2020-03-14 16:58:11', '3');
+INSERT INTO `attachment` VALUES ('8', '英国准备.txt', '/2020/03/b/25b0e6cd-9c32-417e-849e-b015ea42b9d0.txt', 'txt', '110', 'text/plain', 'document', '2020-03-20 21:28:13', '3');
+INSERT INTO `attachment` VALUES ('9', '英国准备.txt', '/2020/03/b/28c30eba-36cd-4b94-8b8b-97d0a55e2352.txt', 'txt', '110', 'text/plain', 'document', '2020-03-20 21:48:45', '3');
 
 -- ----------------------------
 -- Table structure for `attends`
@@ -133,14 +138,12 @@ CREATE TABLE `attends` (
   PRIMARY KEY (`attends_id`),
   KEY `FKaxgqsm98npnl1rxysh9upfjee` (`attends_user_id`),
   CONSTRAINT `FKaxgqsm98npnl1rxysh9upfjee` FOREIGN KEY (`attends_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of attends
 -- ----------------------------
-INSERT INTO `attends` VALUES ('49', '172.20.10.5', null, '2020-02-12 00:00:00', '11', '8', '2', '16:35', '星期三', null, null);
 INSERT INTO `attends` VALUES ('50', '172.20.10.5', null, '2020-02-13 00:00:00', '11', '8', '1', '14:10', '星期四', null, null);
-INSERT INTO `attends` VALUES ('51', '172.20.10.5', null, '2020-02-13 00:00:00', '12', '9', '1', '14:10', '星期四', null, null);
 INSERT INTO `attends` VALUES ('52', '172.20.10.5', null, '2020-02-13 00:00:00', '11', '8', '5', '14:13', '星期四', null, null);
 INSERT INTO `attends` VALUES ('53', '172.20.10.5', null, '2020-02-13 00:00:00', '11', '8', '14', '14:17', '星期四', null, null);
 INSERT INTO `attends` VALUES ('54', null, null, null, '46', null, '14', null, null, '1', '2020-02-13');
@@ -160,6 +163,10 @@ INSERT INTO `attends` VALUES ('72', '192.168.80.1', null, '2020-03-19 15:52:16',
 INSERT INTO `attends` VALUES ('82', '192.168.80.1', null, '2020-03-19 18:57:46', '11', '8', '2', '18:57', '星期四', null, null);
 INSERT INTO `attends` VALUES ('83', '192.168.80.1', null, '2020-03-19 19:05:15', '11', '8', '38', '19:05', '星期四', null, null);
 INSERT INTO `attends` VALUES ('84', '192.168.80.1', null, '2020-03-19 19:10:53', '10', '9', '38', '19:10', '星期四', null, null);
+INSERT INTO `attends` VALUES ('85', '192.168.80.1', null, '2020-03-20 13:40:30', '11', '8', '1', '13:40', '星期五', null, null);
+INSERT INTO `attends` VALUES ('86', '192.168.80.1', '', '2020-03-20 13:40:32', '10', '9', '1', '13:40', '星期五', null, null);
+INSERT INTO `attends` VALUES ('87', '192.168.80.1', '', '2020-03-20 20:59:19', '10', '8', '3', '20:59', '星期五', null, null);
+INSERT INTO `attends` VALUES ('89', '192.168.80.1', null, '2020-03-20 21:54:04', '11', '8', '7', '21:54', '星期五', null, null);
 
 -- ----------------------------
 -- Table structure for `catalog`
@@ -294,7 +301,7 @@ CREATE TABLE `document` (
   PRIMARY KEY (`document_id`),
   KEY `pro_id` (`pro_id`),
   CONSTRAINT `document_ibfk_1` FOREIGN KEY (`pro_id`) REFERENCES `process` (`process_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of document
@@ -307,10 +314,41 @@ INSERT INTO `document` VALUES ('9', '谢广坤死', '谢飞机', '必死', '属�
 INSERT INTO `document` VALUES ('10', '我是爸爸', '爸爸', '爸爸的爸爸叫什么', '爷爷', '10', '10');
 INSERT INTO `document` VALUES ('11', '晚上来', '来', '行', 'ojbk', '2', '11');
 INSERT INTO `document` VALUES ('12', '1', '1', null, null, '1', '16');
-INSERT INTO `document` VALUES ('13', '2', '2', null, null, '2', '17');
+INSERT INTO `document` VALUES ('13', '2', '2', '', null, '2', '17');
 INSERT INTO `document` VALUES ('14', '3', '3', null, null, '3', '18');
 INSERT INTO `document` VALUES ('15', '4', '4', null, null, '4', '19');
-INSERT INTO `document` VALUES ('16', '5', '5', null, null, '5', '20');
+INSERT INTO `document` VALUES ('16', '5', '5', '', null, '5', '20');
+INSERT INTO `document` VALUES ('17', 'yfytdu', 'uyfuf', 'iokpoj', '合格', '22', '35');
+INSERT INTO `document` VALUES ('18', '审批流程测试', '233', '通过', '合格', '22', '38');
+
+-- ----------------------------
+-- Table structure for `holiday`
+-- ----------------------------
+DROP TABLE IF EXISTS `holiday`;
+CREATE TABLE `holiday` (
+  `holiday_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `type_id` bigint(20) DEFAULT NULL COMMENT '请假类型',
+  `leave_days` int(11) DEFAULT NULL COMMENT '请假天数',
+  `leave_reason` varchar(255) DEFAULT NULL COMMENT '请假原因',
+  `hand_user` bigint(11) DEFAULT NULL COMMENT '代班人',
+  `pro_id` bigint(11) DEFAULT NULL,
+  `manager_advice` varchar(255) DEFAULT NULL COMMENT '上级领导建议',
+  PRIMARY KEY (`holiday_id`),
+  KEY `hand_user` (`hand_user`),
+  KEY `pro_id` (`pro_id`),
+  CONSTRAINT `holiday_ibfk_1` FOREIGN KEY (`hand_user`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `holiday_ibfk_2` FOREIGN KEY (`pro_id`) REFERENCES `process` (`process_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of holiday
+-- ----------------------------
+INSERT INTO `holiday` VALUES ('1', '39', '2', '飞飞飞', '4', '29', '尽快返工');
+INSERT INTO `holiday` VALUES ('2', '40', '2', '反反复复', '8', '30', null);
+INSERT INTO `holiday` VALUES ('3', '37', '3', '发发发', '9', '31', null);
+INSERT INTO `holiday` VALUES ('4', '38', '1', '111111', '4', '34', '');
+INSERT INTO `holiday` VALUES ('5', '38', '1', 'yudyudky', '4', '37', '快回');
+INSERT INTO `holiday` VALUES ('6', '39', '1', 'aaa', '4', '40', '快回');
 
 -- ----------------------------
 -- Table structure for `notepaper`
@@ -348,7 +386,7 @@ CREATE TABLE `permission` (
   KEY `FK7b71lfkstl47tston4lrd8066` (`role_id`),
   CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `systemmenu` (`menu_id`),
   CONSTRAINT `permission_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=879 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=911 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of permission
@@ -1046,6 +1084,38 @@ INSERT INTO `permission` VALUES ('875', '0', '96', '12');
 INSERT INTO `permission` VALUES ('876', '0', '97', '12');
 INSERT INTO `permission` VALUES ('877', '0', '98', '12');
 INSERT INTO `permission` VALUES ('878', '0', '99', '12');
+INSERT INTO `permission` VALUES ('879', '1', '101', '1');
+INSERT INTO `permission` VALUES ('880', '1', '101', '2');
+INSERT INTO `permission` VALUES ('881', '1', '101', '3');
+INSERT INTO `permission` VALUES ('882', '1', '101', '4');
+INSERT INTO `permission` VALUES ('883', '1', '101', '5');
+INSERT INTO `permission` VALUES ('884', '1', '101', '6');
+INSERT INTO `permission` VALUES ('885', '1', '101', '7');
+INSERT INTO `permission` VALUES ('886', '0', '101', '9');
+INSERT INTO `permission` VALUES ('887', '1', '102', '1');
+INSERT INTO `permission` VALUES ('888', '1', '102', '2');
+INSERT INTO `permission` VALUES ('889', '1', '102', '3');
+INSERT INTO `permission` VALUES ('890', '1', '102', '4');
+INSERT INTO `permission` VALUES ('891', '1', '102', '5');
+INSERT INTO `permission` VALUES ('892', '1', '102', '6');
+INSERT INTO `permission` VALUES ('893', '1', '102', '7');
+INSERT INTO `permission` VALUES ('894', '0', '102', '9');
+INSERT INTO `permission` VALUES ('895', '1', '103', '1');
+INSERT INTO `permission` VALUES ('896', '1', '103', '2');
+INSERT INTO `permission` VALUES ('897', '1', '103', '3');
+INSERT INTO `permission` VALUES ('898', '1', '103', '4');
+INSERT INTO `permission` VALUES ('899', '1', '103', '5');
+INSERT INTO `permission` VALUES ('900', '0', '103', '6');
+INSERT INTO `permission` VALUES ('901', '0', '103', '7');
+INSERT INTO `permission` VALUES ('902', '0', '103', '9');
+INSERT INTO `permission` VALUES ('903', '1', '100', '1');
+INSERT INTO `permission` VALUES ('904', '1', '100', '2');
+INSERT INTO `permission` VALUES ('905', '1', '100', '3');
+INSERT INTO `permission` VALUES ('906', '1', '100', '4');
+INSERT INTO `permission` VALUES ('907', '1', '100', '5');
+INSERT INTO `permission` VALUES ('908', '1', '100', '6');
+INSERT INTO `permission` VALUES ('909', '1', '100', '7');
+INSERT INTO `permission` VALUES ('910', '0', '100', '9');
 
 -- ----------------------------
 -- Table structure for `position`
@@ -1177,7 +1247,7 @@ CREATE TABLE `process` (
   KEY `FKhtdg4du5ryotah5v1dgyjfh2t` (`process_user_id`),
   CONSTRAINT `FKhtdg4du5ryotah5v1dgyjfh2t` FOREIGN KEY (`process_user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKiltoi9iw3vjixl6u4cd60fi1p` FOREIGN KEY (`pro_file_id`) REFERENCES `attachment` (`attachment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of process
@@ -1197,7 +1267,7 @@ INSERT INTO `process` VALUES ('16', '2020-03-18 00:25:15', '22', '2020-03-18 00:
 INSERT INTO `process` VALUES ('17', '2020-03-18 00:25:30', '22', '2020-03-18 00:25:18', null, '2', null, '0', '2020-03-18 00:25:18', '23', '创建公文', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('18', '2020-03-18 00:26:03', '22', '2020-03-18 00:25:33', null, '3', null, '0', '2020-03-18 00:25:33', '23', '创建公文', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('19', '2020-03-18 00:26:20', '22', '2020-03-18 00:26:09', null, '4', null, '0', '2020-03-18 00:26:09', '23', '创建公文', null, '3', 'lzh');
-INSERT INTO `process` VALUES ('20', '2020-03-18 00:27:40', '22', '2020-03-18 00:26:23', null, '5', null, '0', '2020-03-18 00:26:23', '23', '创建公文', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('20', '2020-03-18 00:27:40', '22', '2020-03-18 00:26:23', null, '5', null, '0', '2020-03-18 00:26:23', '24', '创建公文', null, '3', 'lzh;f');
 INSERT INTO `process` VALUES ('21', '2020-03-18 00:27:54', '22', '2020-03-18 00:27:43', null, '1', null, '0', '2020-03-18 00:27:43', '23', '申请借调档案', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('22', '2020-03-18 00:28:10', '22', '2020-03-18 00:28:00', null, '2', null, '0', '2020-03-18 00:28:00', '23', '申请借调档案', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('23', '2020-03-18 00:28:34', '22', '2020-03-18 00:28:19', null, '3', null, '0', '2020-03-18 00:28:19', '23', '申请借调档案', null, '3', 'lzh');
@@ -1205,7 +1275,18 @@ INSERT INTO `process` VALUES ('24', '2020-03-18 00:28:46', '22', '2020-03-18 00:
 INSERT INTO `process` VALUES ('25', '2020-03-18 00:29:00', '22', '2020-03-18 00:28:49', null, '5', null, '0', '2020-03-18 00:28:49', '23', '申请借调档案', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('26', '2020-03-18 00:29:12', '22', '2020-03-18 00:29:02', null, '6', null, '0', '2020-03-18 00:29:02', '23', '申请借调档案', null, '3', 'lzh');
 INSERT INTO `process` VALUES ('27', '2020-03-18 00:29:25', '22', '2020-03-18 00:29:14', null, '7', null, '0', '2020-03-18 00:29:14', '23', '申请借调档案', null, '3', 'lzh');
-INSERT INTO `process` VALUES ('28', '2020-03-18 00:29:38', '22', '2020-03-18 00:29:31', null, '8', null, '0', '2020-03-18 00:29:31', '24', '申请借调档案', null, '3', 'lzh;u');
+INSERT INTO `process` VALUES ('28', '2020-03-18 00:29:38', '22', '2020-03-18 00:29:31', null, '8', null, '0', '2020-03-18 00:29:31', '25', '申请借调档案', null, '3', 'lzh;u');
+INSERT INTO `process` VALUES ('29', '2020-03-20 16:08:13', '22', '2020-03-20 16:08:07', null, 'b的请假申请', null, '0', '2020-03-20 16:08:07', '25', '请假申请', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('30', '2020-03-20 16:10:04', '22', '2020-03-20 16:09:36', null, 'b的请假申请', null, '0', '2020-03-20 16:09:36', '23', '请假申请', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('31', '2020-03-20 16:10:38', '22', '2020-03-20 16:10:08', null, 'b的请假申请', null, '0', '2020-03-20 16:10:08', '23', '请假申请', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('32', '2020-03-20 16:21:23', '22', '2020-03-20 16:21:13', null, '22', null, '0', '2020-03-20 16:21:13', '23', '申请借调档案', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('34', '2020-03-20 16:35:21', '24', '2020-03-20 16:34:34', null, 'b的请假申请', null, '0', '2020-03-20 16:34:34', '26', '请假申请', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('35', '2020-03-20 21:28:13', '24', '2020-03-20 21:27:49', null, 'yfytdu', null, '0', '2020-03-20 21:27:49', '25', '创建公文', '8', '3', 'lzh;f');
+INSERT INTO `process` VALUES ('36', '2020-03-20 21:28:39', '22', '2020-03-20 21:28:20', null, 'p98y9t', null, '0', '2020-03-20 21:28:20', '25', '申请借调档案', null, '3', 'lzh;u');
+INSERT INTO `process` VALUES ('37', '2020-03-20 21:29:08', '22', '2020-03-20 21:28:43', null, 'b的请假申请', null, '0', '2020-03-20 21:28:43', '25', '请假申请', null, '3', 'lzh');
+INSERT INTO `process` VALUES ('38', '2020-03-20 21:48:45', '22', '2020-03-20 21:48:41', null, '审批流程测试', null, '0', '2020-03-20 21:48:41', '25', '创建公文', '9', '3', 'lzh;f');
+INSERT INTO `process` VALUES ('39', '2020-03-20 21:49:12', '22', '2020-03-20 21:48:52', null, 'aaa', null, '0', '2020-03-20 21:48:52', '25', '申请借调档案', null, '3', 'lzh;u');
+INSERT INTO `process` VALUES ('40', '2020-03-20 21:49:42', '22', '2020-03-20 21:49:21', null, 'b的请假申请', null, '0', '2020-03-20 21:49:21', '25', '请假申请', null, '3', 'lzh');
 
 -- ----------------------------
 -- Table structure for `reviewed`
@@ -1224,7 +1305,7 @@ CREATE TABLE `reviewed` (
   KEY `FK2iljei0wvy0cylwwyfh5dr9yk` (`user_id`),
   CONSTRAINT `FK2iljei0wvy0cylwwyfh5dr9yk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `FKevjvy6myxg1l0ibiuph3i7jw2` FOREIGN KEY (`pro_id`) REFERENCES `process` (`process_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of reviewed
@@ -1250,7 +1331,7 @@ INSERT INTO `reviewed` VALUES ('22', null, null, '23', '16', '1', '0');
 INSERT INTO `reviewed` VALUES ('23', null, null, '23', '17', '1', '0');
 INSERT INTO `reviewed` VALUES ('24', null, null, '23', '18', '1', '0');
 INSERT INTO `reviewed` VALUES ('25', null, null, '23', '19', '1', '0');
-INSERT INTO `reviewed` VALUES ('26', null, null, '23', '20', '1', '0');
+INSERT INTO `reviewed` VALUES ('26', '', '2020-03-20 21:11:15', '25', '20', '1', '0');
 INSERT INTO `reviewed` VALUES ('27', null, null, '23', '21', '1', '0');
 INSERT INTO `reviewed` VALUES ('28', null, null, '23', '22', '1', '0');
 INSERT INTO `reviewed` VALUES ('29', null, null, '23', '23', '1', '0');
@@ -1259,7 +1340,23 @@ INSERT INTO `reviewed` VALUES ('31', null, null, '23', '25', '1', '0');
 INSERT INTO `reviewed` VALUES ('32', null, null, '23', '26', '1', '0');
 INSERT INTO `reviewed` VALUES ('33', null, null, '23', '27', '1', '0');
 INSERT INTO `reviewed` VALUES ('34', '', '2020-03-18 02:24:24', '25', '28', '1', '0');
-INSERT INTO `reviewed` VALUES ('35', null, null, '24', '28', '22', '0');
+INSERT INTO `reviewed` VALUES ('35', '2点来取', '2020-03-20 21:58:15', '25', '28', '22', '0');
+INSERT INTO `reviewed` VALUES ('36', '尽快返工', '2020-03-20 20:55:02', '25', '29', '1', '0');
+INSERT INTO `reviewed` VALUES ('37', null, null, '23', '30', '1', '0');
+INSERT INTO `reviewed` VALUES ('38', null, null, '23', '31', '1', '0');
+INSERT INTO `reviewed` VALUES ('39', null, null, '23', '32', '1', '0');
+INSERT INTO `reviewed` VALUES ('40', '', '2020-03-20 20:54:45', '26', '34', '1', '0');
+INSERT INTO `reviewed` VALUES ('41', null, null, '24', '20', '7', '0');
+INSERT INTO `reviewed` VALUES ('42', 'iokpoj', '2020-03-20 21:32:41', '25', '35', '1', '0');
+INSERT INTO `reviewed` VALUES ('43', 'iugigi', '2020-03-20 21:33:29', '25', '36', '1', '0');
+INSERT INTO `reviewed` VALUES ('44', '快回', '2020-03-20 21:33:54', '25', '37', '1', '0');
+INSERT INTO `reviewed` VALUES ('45', '合格', '2020-03-20 21:35:18', '25', '35', '7', '0');
+INSERT INTO `reviewed` VALUES ('46', '1点来取', '2020-03-20 21:36:06', '25', '36', '22', '0');
+INSERT INTO `reviewed` VALUES ('47', '通过', '2020-03-20 21:50:26', '25', '38', '1', '0');
+INSERT INTO `reviewed` VALUES ('48', '通过', '2020-03-20 21:51:02', '25', '39', '1', '0');
+INSERT INTO `reviewed` VALUES ('49', '快回', '2020-03-20 21:51:30', '25', '40', '1', '0');
+INSERT INTO `reviewed` VALUES ('50', '合格', '2020-03-20 21:54:22', '25', '38', '7', '0');
+INSERT INTO `reviewed` VALUES ('51', '1点来取', '2020-03-20 21:55:02', '25', '39', '22', '0');
 
 -- ----------------------------
 -- Table structure for `role`
@@ -1282,7 +1379,6 @@ INSERT INTO `role` VALUES ('4', '档案管理员', null);
 INSERT INTO `role` VALUES ('5', '部门领导', null);
 INSERT INTO `role` VALUES ('6', '文职员工', null);
 INSERT INTO `role` VALUES ('7', '狱警', null);
-INSERT INTO `role` VALUES ('9', '实习生', null);
 
 -- ----------------------------
 -- Table structure for `statuslist`
@@ -1303,16 +1399,16 @@ CREATE TABLE `statuslist` (
 -- ----------------------------
 INSERT INTO `statuslist` VALUES ('1', 'label-success', 'aoa_mailnumber', '有效', '0', null);
 INSERT INTO `statuslist` VALUES ('2', 'label-default', 'aoa_mailnumber', '无效', '1', null);
-INSERT INTO `statuslist` VALUES ('3', 'label-warning', 'aoa_task_list', '新任务', '0', '20%');
-INSERT INTO `statuslist` VALUES ('4', 'label-info', 'aoa_task_list', '已接收', '1', '40%');
-INSERT INTO `statuslist` VALUES ('5', 'label-primary', 'aoa_task_list', '进行中', '2', '60%');
-INSERT INTO `statuslist` VALUES ('6', 'label-danger', 'aoa_task_list', '已提交', '3', '80%');
-INSERT INTO `statuslist` VALUES ('7', 'label-success', 'aoa_task_list', '已完成', '4', '100%');
+INSERT INTO `statuslist` VALUES ('3', 'label-warning', 'task', '新任务', '0', '20%');
+INSERT INTO `statuslist` VALUES ('4', 'label-info', 'task', '已接收', '1', '40%');
+INSERT INTO `statuslist` VALUES ('5', 'label-primary', 'task', '进行中', '2', '60%');
+INSERT INTO `statuslist` VALUES ('6', 'label-danger', 'task', '已提交', '3', '80%');
+INSERT INTO `statuslist` VALUES ('7', 'label-success', 'task', '已完成', '4', '100%');
 INSERT INTO `statuslist` VALUES ('8', 'label-info', 'aoa_note_list', '一般', '0', null);
 INSERT INTO `statuslist` VALUES ('9', 'label-danger', 'aoa_note_list', '重要', '1', null);
-INSERT INTO `statuslist` VALUES ('10', 'label-info', 'aoa_attends_list', '正常', '0', null);
-INSERT INTO `statuslist` VALUES ('11', 'label-warning', 'aoa_attends_list', '迟到', '1', null);
-INSERT INTO `statuslist` VALUES ('12', 'label-danger', 'aoa_attends_list', '早退', '2', null);
+INSERT INTO `statuslist` VALUES ('10', 'label-info', 'attends', '正常', '0', null);
+INSERT INTO `statuslist` VALUES ('11', 'label-warning', 'attends', '迟到', '1', null);
+INSERT INTO `statuslist` VALUES ('12', 'label-danger', 'attends', '早退', '2', null);
 INSERT INTO `statuslist` VALUES ('13', 'label-danger', 'a', '旷工', '3', null);
 INSERT INTO `statuslist` VALUES ('14', 'label-primary', 'inform', '一般', '0', null);
 INSERT INTO `statuslist` VALUES ('15', 'label-warning', 'inform', '重要', '1', '');
@@ -1345,7 +1441,7 @@ CREATE TABLE `systemmenu` (
   `parent_id` bigint(20) DEFAULT NULL,
   `sort_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of systemmenu
@@ -1391,6 +1487,10 @@ INSERT INTO `systemmenu` VALUES ('96', '1', null, 'glyphicon-record', '档案借
 INSERT INTO `systemmenu` VALUES ('97', '1', null, 'glyphicon-record', '我的提交', '/myarchives', '7', '3');
 INSERT INTO `systemmenu` VALUES ('98', '1', null, 'glyphicon-record', '借调审核', '/verifyarchives', '7', '4');
 INSERT INTO `systemmenu` VALUES ('99', '1', null, 'glyphicon-record', '公文展示', '/showdocument', '6', '4');
+INSERT INTO `systemmenu` VALUES ('100', '1', null, 'glyphicon-calendar', '请假管理', '#', '0', '8');
+INSERT INTO `systemmenu` VALUES ('101', '1', null, 'glyphicon-record', '请假申请', '/applyholiday', '100', '1');
+INSERT INTO `systemmenu` VALUES ('102', '1', null, 'glyphicon-record', '我的申请', '/myholiday', '100', '2');
+INSERT INTO `systemmenu` VALUES ('103', '1', null, 'glyphicon-record', '请假审核', '/verifyholiday', '100', '3');
 
 -- ----------------------------
 -- Table structure for `task_list`
@@ -1415,12 +1515,15 @@ CREATE TABLE `task_list` (
   PRIMARY KEY (`task_id`),
   KEY `FK7qch0fh6s2y73dvngy1m87aw7` (`task_push_user_id`),
   CONSTRAINT `FK7qch0fh6s2y73dvngy1m87aw7` FOREIGN KEY (`task_push_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of task_list
 -- ----------------------------
 INSERT INTO `task_list` VALUES ('53', '老赵 ，把老子的意大利炮扛来！！', '2020-03-04 12:35:45', '0', '1', '2020-03-03 17:52:09', '2020-03-03 17:52:09', '2020-03-03 12:35:45', '5', '老赵 ，把老子的意大利炮扛来', null, '意大利炮', '3', '1', 'a');
+INSERT INTO `task_list` VALUES ('55', '', '2020-03-21 21:23:24', '0', '1', '2020-03-20 21:23:43', '2020-03-20 21:23:43', '2020-03-20 21:23:24', '3', '抓刘华强', null, '刘华强', '4', '1', 'b');
+INSERT INTO `task_list` VALUES ('56', '', '2020-03-21 21:26:07', '0', '0', '2020-03-20 21:26:33', '2020-03-20 21:26:33', '2020-03-20 21:26:07', '6', '快', null, '端杯茶', '3', '1', 'b');
+INSERT INTO `task_list` VALUES ('57', '', '2020-03-21 21:47:00', '0', '0', '2020-03-20 21:47:18', '2020-03-20 21:47:18', '2020-03-20 21:47:00', '3', '快', null, '测试', '3', '1', 'a');
 
 -- ----------------------------
 -- Table structure for `task_logger`
@@ -1436,12 +1539,13 @@ CREATE TABLE `task_logger` (
   PRIMARY KEY (`logger_id`),
   KEY `FK5gu0thq54i7ujc6cict009h4y` (`task_id`),
   CONSTRAINT `FK5gu0thq54i7ujc6cict009h4y` FOREIGN KEY (`task_id`) REFERENCES `task_list` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of task_logger
 -- ----------------------------
 INSERT INTO `task_logger` VALUES ('38', '2020-03-03 17:54:38', '', '53', 'a', '5');
+INSERT INTO `task_logger` VALUES ('39', '2020-03-20 21:27:20', '泡好', '56', 'b', '6');
 
 -- ----------------------------
 -- Table structure for `task_user`
@@ -1457,12 +1561,15 @@ CREATE TABLE `task_user` (
   KEY `FK654dfo0oouy3fk07fs7rqo4ld` (`task_recive_user_id`),
   CONSTRAINT `FK2714kl5ywm5chya4dxte8c788` FOREIGN KEY (`task_id`) REFERENCES `task_list` (`task_id`),
   CONSTRAINT `FK654dfo0oouy3fk07fs7rqo4ld` FOREIGN KEY (`task_recive_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of task_user
 -- ----------------------------
 INSERT INTO `task_user` VALUES ('72', '5', '53', '2');
+INSERT INTO `task_user` VALUES ('74', '3', '55', '3');
+INSERT INTO `task_user` VALUES ('75', '6', '56', '3');
+INSERT INTO `task_user` VALUES ('76', '3', '57', '2');
 
 -- ----------------------------
 -- Table structure for `typelist`
@@ -1482,13 +1589,13 @@ CREATE TABLE `typelist` (
 -- ----------------------------
 INSERT INTO `typelist` VALUES ('1', 'red', 'aoa_mailnumber', '系统邮件', '0');
 INSERT INTO `typelist` VALUES ('2', 'red', 'aoa_mailnumber', '公司邮件', '1');
-INSERT INTO `typelist` VALUES ('3', 'red', 'aoa_task_list', '公事', '0');
-INSERT INTO `typelist` VALUES ('4', 'red', 'aoa_task_list', '私事', '1');
+INSERT INTO `typelist` VALUES ('3', 'red', 'task', '公事', '0');
+INSERT INTO `typelist` VALUES ('4', 'red', 'task', '私事', '1');
 INSERT INTO `typelist` VALUES ('5', 'red', 'aoa_note_list', '我的笔记', '0');
 INSERT INTO `typelist` VALUES ('6', 'red', 'aoa_note_list', '公司笔记', '1');
 INSERT INTO `typelist` VALUES ('7', 'red', 'aoa_note_list', '共享笔记', '2');
-INSERT INTO `typelist` VALUES ('8', 'red', 'aoa_attends_list', '上班', '1');
-INSERT INTO `typelist` VALUES ('9', 'red', 'aoa_attends_list', '下班', '2');
+INSERT INTO `typelist` VALUES ('8', 'red', 'attends', '上班', '1');
+INSERT INTO `typelist` VALUES ('9', 'red', 'attends', '下班', '2');
 INSERT INTO `typelist` VALUES ('10', 'red', 'inform', '公告', '0');
 INSERT INTO `typelist` VALUES ('11', 'red', 'inform', '通知', '1');
 INSERT INTO `typelist` VALUES ('12', 'red', 'inform', '投票', '2');
@@ -1516,13 +1623,13 @@ INSERT INTO `typelist` VALUES ('33', 'red', 'aoa_overtime', '工作日', '0');
 INSERT INTO `typelist` VALUES ('34', 'red', 'aoa_overtime', '休息日', '1');
 INSERT INTO `typelist` VALUES ('35', 'red', 'aoa_overtime', '节假日', '2');
 INSERT INTO `typelist` VALUES ('36', 'red', 'aoa_overtime', '其他', '3');
-INSERT INTO `typelist` VALUES ('37', '1、年假：工作满一年以上每年可享受带薪年假，当年的年假使用期至次年3月1日止；未经用人单位批准，员工不得自行休假。', 'aoa_holiday', '年假', '7');
-INSERT INTO `typelist` VALUES ('38', '2、事假：按照平均工作日扣发薪资（包含工资及各类补贴福利）；单次事假原则上不应超过3天，当年累计事假超过15天的视为主动放弃继续履行岗位职责的权利，特殊情况除外。  ', 'aoa_holiday', '事假', '4');
-INSERT INTO `typelist` VALUES ('39', '3、病假：两天及以上病假必须持工作地二级甲等以上医院相关病假证明单或就医记录证明，否则无法享受病假工资；单次病假超过5天，应当持有工作所在地三级甲等医院提供的病假证明单。原则上当年累计病假超过15天应视为不具备继续履行岗位职责身体条件，特殊情况除外。  ', 'aoa_holiday', '病假', null);
-INSERT INTO `typelist` VALUES ('40', '4、婚假：婚假为十天，包含休息日，请婚假必须持结婚证明，结婚证必须在泛微工作期间领取，且婚假必须在一年内使用完毕，不得分次休假，国家或地方政府有其他规定的按照当地要求执行；  ', 'aoa_holiday', '婚假', '10');
-INSERT INTO `typelist` VALUES ('41', '5、产假及哺乳假：按国家及地方法律法规执行，包含休息日与法定节假日；  ', 'aoa_holiday', '产假及哺乳假', '180');
-INSERT INTO `typelist` VALUES ('42', '6、陪产假：泛微正式男性员工在工作期间配偶生育的，可凭子女出生证明，享受十个自然日陪产假。  ', 'aoa_holiday', '陪产假', '10');
-INSERT INTO `typelist` VALUES ('43', '7、丧假：直系亲属：配偶、子女、父母可享受三天，岳父母、祖父母、外祖父母可享受一天', 'aoa_holiday', '丧假', null);
+INSERT INTO `typelist` VALUES ('37', '1、年假：工作满一年以上每年可享受带薪年假，当年的年假使用期至次年3月1日止；未经用人单位批准，员工不得自行休假。', 'holiday', '年假', '7');
+INSERT INTO `typelist` VALUES ('38', '2、事假：按照平均工作日扣发薪资（包含工资及各类补贴福利）；单次事假原则上不应超过3天，当年累计事假超过15天的视为主动放弃继续履行岗位职责的权利，特殊情况除外。  ', 'holiday', '事假', '4');
+INSERT INTO `typelist` VALUES ('39', '3、病假：两天及以上病假必须持工作地二级甲等以上医院相关病假证明单或就医记录证明，否则无法享受病假工资；单次病假超过5天，应当持有工作所在地三级甲等医院提供的病假证明单。原则上当年累计病假超过15天应视为不具备继续履行岗位职责身体条件，特殊情况除外。  ', 'holiday', '病假', null);
+INSERT INTO `typelist` VALUES ('40', '4、婚假：婚假为十天，包含休息日，请婚假必须持结婚证明，结婚证必须在泛微工作期间领取，且婚假必须在一年内使用完毕，不得分次休假，国家或地方政府有其他规定的按照当地要求执行；  ', 'holiday', '婚假', '10');
+INSERT INTO `typelist` VALUES ('41', '5、产假及哺乳假：按国家及地方法律法规执行，包含休息日与法定节假日；  ', 'holiday', '产假及哺乳假', '180');
+INSERT INTO `typelist` VALUES ('42', '6、陪产假：泛微正式男性员工在工作期间配偶生育的，可凭子女出生证明，享受十个自然日陪产假。  ', 'holiday', '陪产假', '10');
+INSERT INTO `typelist` VALUES ('43', '7、丧假：直系亲属：配偶、子女、父母可享受三天，岳父母、祖父母、外祖父母可享受一天', 'holiday', '丧假', null);
 INSERT INTO `typelist` VALUES ('44', '', 'aoa_schedule_list', '日程提醒', '0');
 INSERT INTO `typelist` VALUES ('45', '', 'aoa_schedule_list', '假日安排', '1');
 INSERT INTO `typelist` VALUES ('46', 'red', 'aoa_attends_list', '请假', '3');
@@ -1576,13 +1683,13 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '浙江省杭州市拱墅区上塘街道浙江树人大学', '62175555555555444', '1986-02-03 00:00:00', 'lzh@pri.com', '1', '2020-03-02 22:43:57', '510322198602030429', '/c78405f8-63c6-4800-a393-be80f0612ab5.png', '0', null, null, null, '1', '123456', '郦卓华', '12000', '浙江树人大学', '男', 'blue', '本科', 'lzh', '我是爸爸', '18888753189', '1', '1', '1', '1', null, 'lzh', '白班');
+INSERT INTO `user` VALUES ('1', '浙江省杭州市拱墅区上塘街道浙江树人大学', '62175555555555444', '1986-02-03 00:00:00', 'lzh@pri.com', '1', '2020-03-02 22:43:57', '510322198602030429', '/c8598312-8063-4ccb-ab8a-ca32cfa9860f.png', '0', null, null, null, '1', '123456', '郦卓华', '12000', '浙江树人大学', '男', 'blue', '本科', 'lzh', '我是爸爸', '18888753189', '1', '1', '1', '1', null, 'lzh', '白班');
 INSERT INTO `user` VALUES ('2', '浙江省', '6217837736828630', '1994-03-28 00:00:00', 'lzh@pri.com', '1', '2020-03-02 22:44:21', '510322198602030429', '/65b5e138-6cbe-454e-a636-bdd526a844f3.jpg', '0', null, null, null, '2', '123456', 'a', '1000', '清华大学', '女', 'blue', '硕士', 'a', '', '13203318185', '1', '2', '2', '0', null, 'a', '夜班');
 INSERT INTO `user` VALUES ('3', '浙江省', '6217002940101998752', '1995-03-05 00:00:00', 'lzh@pri.com', '1', '2020-03-02 22:44:21', '510322198602030429', '3.jpg', '0', null, null, null, '3', '123456', 'b', '1000', '清华大学', '女', 'blue', '硕士', 'b', '', '18683688154', '1', '3', '2', '0', null, 'b', '夜班');
 INSERT INTO `user` VALUES ('4', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '1', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '4', '123456', 'c', '3000', '清华大学', '男', 'blue', '硕士', 'c', '', '18173328888', '1', '4', '2', '0', null, 'c', null);
 INSERT INTO `user` VALUES ('5', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '5', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '5', '123456', 'd', '4000', '清华大学', '男', 'blue', '博士', 'd', '', '18173328976', '6', '11', '5', '0', null, 'd', null);
 INSERT INTO `user` VALUES ('6', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '5', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '6', '123456', 'e', '3700', '清华大学', '女', 'blue', '本科', 'e', '', '18868688866', '6', '25', '6', '0', null, 'e', null);
-INSERT INTO `user` VALUES ('7', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '7', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '7', '123456', 'f', '5000', '清华大学', '男', 'blue', '本科', 'f', null, '13117336953', '2', '7', '3', '0', null, 'f', '白班');
+INSERT INTO `user` VALUES ('7', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '7', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '7', '123456', 'f', '5000', '清华大学', '男', 'blue', '本科', 'f', null, '13117336953', '2', '7', '3', '0', null, 'f', '夜班');
 INSERT INTO `user` VALUES ('8', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '7', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '8', '123456', 'g', '5000', '清华大学', '女', 'blue', '本科', 'g', null, '13117336954', '2', '21', '6', '0', null, 'g', null);
 INSERT INTO `user` VALUES ('9', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '9', '2020-03-02 22:44:21', '510322198602030429', '/820fd533-58a8-4726-a930-585b15575106.jpg', '0', null, null, null, '9', '123456', 'h', '3111', '清华大学', '女', 'blue', '本科', 'h', '', '13034507214', '3', '8', '5', '0', null, 'h', '白班');
 INSERT INTO `user` VALUES ('10', '浙江省', '6217002940101998752', '1996-09-19 16:56:50', 'lzh@pri.com', '13', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '10', '123456', 'i', '2555', '清华大学', '女', 'blue', '本科', 'i', null, '13117336954', '7', '12', '5', '0', null, 'i', null);
@@ -1597,7 +1704,7 @@ INSERT INTO `user` VALUES ('18', '浙江省', '62175555555555444', '1996-09-19 1
 INSERT INTO `user` VALUES ('19', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '13', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '19', '123456', 'r', '5000', '清华大学', '女', 'yellow', '本科', 'r', null, '13117336953', '13', '18', '5', '0', null, 'r', null);
 INSERT INTO `user` VALUES ('20', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '13', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '20', '123456', 's', '3111', '清华大学', '女', 'red', '本科', 's', null, '13117336953', '14', '19', '5', '0', null, 's', null);
 INSERT INTO `user` VALUES ('21', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '21', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '21', '123456', 't', '2555', '清华大学', '女', 'blue', '本科', 'y', null, '18868688866', '15', '20', '5', '0', null, 'y', '白班');
-INSERT INTO `user` VALUES ('22', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '22', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '22', '123456', 'u', '5000', '清华大学', '男', 'blue', '硕士', 'u', null, '13117336953', '10', '15', '4', '0', null, 'u', null);
+INSERT INTO `user` VALUES ('22', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '22', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '22', '123456', 'u', '5000', '清华大学', '男', 'blue', '硕士', 'u', null, '13117336953', '10', '15', '4', '0', null, 'u', '夜班');
 INSERT INTO `user` VALUES ('23', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '11', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '23', '123456', 'v', '6000', '清华大学', '女', 'blue', '博士', 'v', '', '13117336954', '8', '28', '7', '0', null, 'v', null);
 INSERT INTO `user` VALUES ('24', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '12', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '24', '123456', 'w', '6000', '清华大学', '女', 'blue', '博士', 'w', '', '13117336954', '9', '29', '7', '0', null, 'w', null);
 INSERT INTO `user` VALUES ('25', '浙江省', '62175555555555444', '1996-09-19 16:56:50', 'lzh@pri.com', '20', '2020-03-02 22:44:21', '510322198602030429', '', '0', null, null, null, '25', '123456', 'x', '5000', '清华大学', '女', 'blue', '本科', 'x', null, '13117336953', '14', '34', '7', '0', null, 'x', null);
@@ -3858,7 +3965,7 @@ CREATE TABLE `user_login_record` (
   PRIMARY KEY (`record_id`),
   KEY `FKks6qpqj3ss4e4timjt0xok1p0` (`user_id`),
   CONSTRAINT `FKks6qpqj3ss4e4timjt0xok1p0` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=397 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=428 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of user_login_record
@@ -4060,3 +4167,34 @@ INSERT INTO `user_login_record` VALUES ('393', 'Chrome/75.0.3770.100', '192.168.
 INSERT INTO `user_login_record` VALUES ('394', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-19 17:05:42', null, '2');
 INSERT INTO `user_login_record` VALUES ('395', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-19 18:30:48', null, '2');
 INSERT INTO `user_login_record` VALUES ('396', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-19 19:05:12', null, '38');
+INSERT INTO `user_login_record` VALUES ('397', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-19 23:39:56', null, '1');
+INSERT INTO `user_login_record` VALUES ('398', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 12:23:06', null, '1');
+INSERT INTO `user_login_record` VALUES ('399', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 13:40:26', null, '1');
+INSERT INTO `user_login_record` VALUES ('400', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 14:13:57', null, '1');
+INSERT INTO `user_login_record` VALUES ('401', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 14:43:24', null, '1');
+INSERT INTO `user_login_record` VALUES ('402', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 14:43:58', null, '3');
+INSERT INTO `user_login_record` VALUES ('403', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 15:27:24', null, '1');
+INSERT INTO `user_login_record` VALUES ('404', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 16:05:59', null, '3');
+INSERT INTO `user_login_record` VALUES ('405', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 18:37:35', null, '1');
+INSERT INTO `user_login_record` VALUES ('406', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 20:33:56', null, '1');
+INSERT INTO `user_login_record` VALUES ('407', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 20:59:12', null, '3');
+INSERT INTO `user_login_record` VALUES ('408', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:01:00', null, '1');
+INSERT INTO `user_login_record` VALUES ('409', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:05:47', null, '1');
+INSERT INTO `user_login_record` VALUES ('410', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:24:41', null, '1');
+INSERT INTO `user_login_record` VALUES ('411', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:27:02', null, '3');
+INSERT INTO `user_login_record` VALUES ('412', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:29:44', null, '1');
+INSERT INTO `user_login_record` VALUES ('413', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:30:24', null, '3');
+INSERT INTO `user_login_record` VALUES ('414', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:32:05', null, '1');
+INSERT INTO `user_login_record` VALUES ('415', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:34:23', null, '7');
+INSERT INTO `user_login_record` VALUES ('416', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:35:38', null, '22');
+INSERT INTO `user_login_record` VALUES ('417', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:36:44', null, '1');
+INSERT INTO `user_login_record` VALUES ('418', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:45:14', null, '1');
+INSERT INTO `user_login_record` VALUES ('419', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:45:34', null, '1');
+INSERT INTO `user_login_record` VALUES ('420', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:48:00', null, '3');
+INSERT INTO `user_login_record` VALUES ('421', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:50:03', null, '1');
+INSERT INTO `user_login_record` VALUES ('422', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:53:59', null, '7');
+INSERT INTO `user_login_record` VALUES ('423', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 21:54:42', null, '22');
+INSERT INTO `user_login_record` VALUES ('424', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 22:09:00', null, '1');
+INSERT INTO `user_login_record` VALUES ('425', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 22:27:21', null, '1');
+INSERT INTO `user_login_record` VALUES ('426', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 22:39:14', null, '1');
+INSERT INTO `user_login_record` VALUES ('427', 'Chrome/75.0.3770.100', '192.168.80.1', '2020-03-20 22:41:50', null, '1');
