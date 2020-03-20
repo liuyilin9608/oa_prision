@@ -43,7 +43,6 @@
 									class="glyphicon glyphicon-zoom-in"></span> 审核</a> 
 								 <a href="particular?id=${pro.proid!""}&typename=${pro.typename!""}" class="label xiugai"><span
 									class="glyphicon glyphicon-search"></span> 查看</a> 
-								
 							</td>
 						</tr>
 						</#list>
@@ -67,7 +66,7 @@
 		   $(function(){
 			   $(".chazhao").click(function(){
 				   var con=$(".cha").val();
-				   $(".thistable").load("auditorar",{val:con});
+				   $(".thistable").load("auditorleave",{val:con});
 			   });
 		});
 	

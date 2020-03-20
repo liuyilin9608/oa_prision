@@ -207,7 +207,7 @@ border-top: 1px solid #2196F3;
 											
 										</div>
 									</td>
-									<td colspan="13"><p style="margin-top: 20px;font-size:16px;">${(eve.adminAdvice)!''}</p></td>
+									<td colspan="13"><p style="margin-top: 20px;font-size:16px;">${(eve.archAdvice)!''}</p></td>
 								</tr>
 							</table>
 						</div>

@@ -62,20 +62,16 @@ a:hover {
 						<div class="col-md-6 form-group">
 							<label class="control-label"> <span>类型</span></label>
 							 <select class="form-control" name="typeId">
-							<#list typelist as type>
-							  <#if type.typeModel=="task_list">
-								<option value="${type.typeId}">${type.typeName}</option>
-								</#if>
+							<#list typelist as type>					  
+								<option value="${type.typeId}">${type.typeName}</option>					
 							</#list>
 							</select>
 						</div>
 						<div class="col-md-6 form-group">
 							<label class="control-label">状态</label> 
 							<select class="form-control" name="statusId">
-								<#list statuslist as status>
-								<#if status.statusModel=="task_list">
-							     <option value="${status.statusId}">${status.statusName}</option>
-								</#if>
+								<#list statuslist as status>				
+							     <option value="${status.statusId}">${status.statusName}</option>							
 								</#list>
 							</select>
 						</div>

@@ -130,9 +130,9 @@ public class TaskController {
 		Pageable pa=new PageRequest(page, size);
 		ModelAndView mav = new ModelAndView("task/addtask");
 		// 查询类型表
-		Iterable<SystemTypeList> typelist = tydao.findAll();
+		Iterable<SystemTypeList> typelist = tydao.findByTypeModel("task");
 		// 查询状态表
-		Iterable<SystemStatusList> statuslist = sdao.findAll();
+		Iterable<SystemStatusList> statuslist = sdao.findByStatusModel("task");
 		// 查询部门下面的员工
 		Page<User> pagelist = udao.findByFatherId(userId,pa);
 		List<User> emplist=pagelist.getContent();

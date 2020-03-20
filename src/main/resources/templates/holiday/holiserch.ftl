@@ -160,7 +160,7 @@ border-top: 1px solid #2196F3;
 				</tr>
 				
 				<tr class="top ss">
-					<td colspan="14" class="wi "><div class="bottom" ><label class="control-label font">档案借调申请</label></div></td>
+					<td colspan="14" class="wi "><div class="bottom" ><label class="control-label font">请假申请</label></div></td>
 				</tr>
 				
 				<tr class="rile ">
@@ -171,16 +171,16 @@ border-top: 1px solid #2196F3;
 					
 				</tr>		
 				<tr class="rile">
-				    <td class="wi" style="width:100px;"><label class="control-label">案卷号</label></td>
-					<td  style="width:140px;"><div class="bottom">${(eve.archno)!''}</div></td>
-					<td class="wi" style="width:100px;"><label class="control-label">档案标题</label></td>
-					<td  style="width:140px;"><div class="bottom">${(eve.title)!''}</div></td>		
+				    <td class="wi" style="width:100px;"><label class="control-label">请假类型</label></td>
+					<td  style="width:140px;"><div class="bottom">${(hty.typeName)!''}</div></td>
+					<td class="wi" style="width:100px;"><label class="control-label">代班人员</label></td>
+					<td  style="width:140px;"><div class="bottom">${(u.userName)!''}</div></td>		
 				</tr>
 				<tr class="rile ">
-				<td class="wi" style="width:100px;"><label class="control-label">借调天数</label></td>
-					<td  style="width:140px;"><div class="bottom">${(eve.borrowDays)!''}</div></td>
-					<td class="wi" style="width:100px;"><label class="control-label">借调原因</label></td>
-					<td  style="width:140px;"><div class="bottom">${(eve.borrowReason)!''}</div></td>
+				<td class="wi" style="width:100px;"><label class="control-label">请假天数</label></td>
+					<td  style="width:140px;"><div class="bottom">${(eve.leaveDays)!''}</div></td>
+					<td class="wi" style="width:100px;"><label class="control-label">请假原因</label></td>
+					<td  style="width:140px;"><div class="bottom">${(eve.leaveReason)!''}</div></td>
 				</tr>
 				<tr class="top">
 					<td colspan="14" class="wi "><div class="bottom" ><label class="control-label font">审批意见</label></div></td>
@@ -197,17 +197,6 @@ border-top: 1px solid #2196F3;
 										</div>
 									</td>
 									<td colspan="13"><p style="margin-top: 20px;font-size:16px;">${(eve.managerAdvice)!''}</p></td>
-								</tr>
-								
-								<tr>
-									<td style="width:130px;text-align:center;background-color:#6d9eeb;">
-										<div class="mon">
-											<p style="height:20px;"></p>
-											<span>档案管理科科长意见</span>
-											
-										</div>
-									</td>
-									<td colspan="13"><p style="margin-top: 20px;font-size:16px;">${(eve.archAdvice)!''}</p></td>
 								</tr>
 							</table>
 						</div>

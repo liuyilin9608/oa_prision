@@ -261,6 +261,37 @@ public class ProcessService {
 		}
 		return pagelist;
 	}
+	
+	public Page<AubUser> verifyHoliday(User user,int page,int size,String val,Model model){
+		Pageable pa=new PageRequest(page, size);
+		Page<AubUser> pagelist=null;
+		Page<AubUser> pagelist2=null;
+		List<Order> orders = new ArrayList<>();
+		User u=udao.findByUserName(val);
+		SystemStatusList status=sdao.findByStatusModelAndStatusName("process", val);
+		System.out.println("状态：" + status);
+		if(StringUtil.isEmpty(val)){
+			orders.add(new Order(Direction.DESC, "applyTime"));
+			Sort sort = new Sort(orders);
+			pa=new PageRequest(page,size,sort);
+			pagelist=redao.findHoliByUserIdOrderByStatusId(user,false, pa);
+			System.out.println("分页数据：" + pagelist);
+		}else if(!Objects.isNull(u)){
+			pagelist=redao.findHoliprocesslist(user,u,false,pa);
+			model.addAttribute("sort", "&val="+val);
+		}else if(!Objects.isNull(status)){
+			pagelist=redao.findHolibystatusprocesslist(user,status.getStatusId(),false,pa);
+			model.addAttribute("sort", "&val="+val);
+		}else{
+			pagelist2=redao.findHolibytypenameprocesslist(user, val,false, pa);
+			if(!pagelist2.hasContent()){
+				pagelist2=redao.findHolibyprocessnameprocesslist(user, val,false, pa);
+			}
+			model.addAttribute("sort", "&val="+val);
+			return pagelist2;
+		}
+		return pagelist;
+	}
 	/**
 	 * 审核页数据封装
 	 */

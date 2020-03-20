@@ -38,6 +38,7 @@ import com.github.pagehelper.util.StringUtil;
 import cn.oa.lzh.model.dao.archive.ArchiveBorrowDao;
 import cn.oa.lzh.model.dao.attendcedao.PrisionDao;
 import cn.oa.lzh.model.dao.document.DocumentDao;
+import cn.oa.lzh.model.dao.holiday.HolidayDao;
 import cn.oa.lzh.model.dao.notedao.AttachmentDao;
 import cn.oa.lzh.model.dao.processdao.ProcessListDao;
 import cn.oa.lzh.model.dao.processdao.ReviewedDao;
@@ -48,6 +49,7 @@ import cn.oa.lzh.model.dao.user.UserService;
 import cn.oa.lzh.model.entity.archive.ArchiveBorrow;
 import cn.oa.lzh.model.entity.attendce.Prision;
 import cn.oa.lzh.model.entity.document.Document;
+import cn.oa.lzh.model.entity.holiday.Holiday;
 import cn.oa.lzh.model.entity.note.Attachment;
 import cn.oa.lzh.model.entity.process.AubUser;
 import cn.oa.lzh.model.entity.process.ProcessList;
@@ -75,6 +77,8 @@ public class DocumentController {
 	private ReviewedDao reDao;
 	@Autowired
 	private ArchiveBorrowDao abDao;
+	@Autowired
+	private HolidayDao hDao;
 	@Autowired
 	private ProcessService processService;
 	@Autowired
@@ -262,6 +266,7 @@ public class DocumentController {
 		}
 		// 回显申请相关所有信息
 		map = processService.apply(name, user, type, process);
+		System.out.println("申请类型：" + type);
 		if (("创建公文").equals(type)) {
 			Document eve = docDao.findByProId(process);
 			System.out.println("回显公文申请数据" + eve.toString());
@@ -273,6 +278,15 @@ public class DocumentController {
 			model.addAttribute("eve", eve);
 			model.addAttribute("map", map);
 			return "archive/archserch";
+		} else if (("请假申请").equals(type)) {
+			Holiday eve = hDao.findByProId(process);
+			SystemTypeList hty = tyDao.findOne(eve.getTypeId());
+			User u = userDao.findOne(eve.getHandUser().getUserId());
+			model.addAttribute("eve", eve);
+			model.addAttribute("map", map);
+			model.addAttribute("hty", hty);
+			model.addAttribute("u", u);
+			return "holiday/holiserch";
 		}
 		return "/";
 	}
@@ -324,22 +338,21 @@ public class DocumentController {
 		User applyUser = userDao.findOne(process.getUserId().getUserId());
 		System.out.println("申请人信息" + applyUser.toString());
 	
-		if(StringUtil.isEmpty(reviewed.getUsername())){
-			return "index/error";
-		}
-		
 		if (!StringUtil.isEmpty(req.getParameter("liuzhuan"))) {
 			name = req.getParameter("liuzhuan");
 		}
 		System.out.println("审核状态：" + name);
 		// 审核并流转
 		if (!StringUtil.isEmpty(name)) {
+			if(StringUtil.isEmpty(reviewed.getUsername())){
+				return "index/error";
+			}
 			// 获取下一个审核人
 			User userNext = userDao.findByUserName(reviewed.getUsername());
 			System.out.println("下一个审核人信息：" + userNext);
 			System.out.println("流程类型：" + typename);
 			System.out.println("下一个审核人Id" + userNext.getUserId());
-			if (("新建公文").equals(typename)) {
+			if (("创建公文").equals(typename)) {
 				if (userNext.getUserId().equals(7L)) {
 					System.out.println("修改一级审核，创建二级审核，修改流程状态");
 					processService.save(proId, user, reviewed, process,
@@ -386,11 +399,18 @@ public class DocumentController {
 				arch.setManagerAdvice(reviewed.getAdvice());
 				abDao.save(arch);
 			}
-			if (user.getPosition().getId().equals(22L)) {
+			if (user.getPosition().getId().equals(15L)) {
 				arch.setArchAdvice(reviewed.getAdvice());
 				abDao.save(arch);
-			}
+			} 
 			return "redirect:/verifyarchives";
+		}else if("请假申请".equals(typename)){
+			Holiday holiday = hDao.findByProId(process);
+			if (applyUser.getFatherId().equals(user.getUserId())) {
+				holiday.setManagerAdvice(reviewed.getAdvice());
+				hDao.save(holiday);
+			}
+			return "redirect:/verifyholiday";
 		}
 		return "/";
 	}

@@ -1,4 +1,4 @@
-<div class="bgc-w box box-primary">
+	<div class="bgc-w box box-primary">
 				<!--盒子头-->
 				<div class="box-header">
 					<h3 class="box-title">
@@ -9,7 +9,7 @@
 					<div class="box-tools">
 						<div class="input-group" style="width: 220px;">
 							<input type="text" class="form-control input-sm cha"
-								placeholder="标题，申请人，类型，状态查询" />
+								placeholder="审核人，类型，标题，状态查询" />
 							<div class="input-group-btn chazhao">
 								<a class="btn btn-sm btn-default"><span
 									class="glyphicon glyphicon-search"></span></a>
@@ -17,44 +17,48 @@
 						</div>
 					</div>
 				</div>
-							<!--盒子身体-->
 				<div class="box-body no-padding">
 					<div class="table-responsive">
 						<table class="table table-hover">
 						<tr>
+							
 							<th scope="col">类型</th>
 							<th scope="col">标题</th>
-							<th scope="col">申请人</th>
 							<th scope="col">申请时间</th>
+							<th scope="col">审核人</th>
 							<th scope="col">紧急程度</th>
 							<th scope="col">状态</th>
 							<th scope="col">操作</th>
 						</tr>
-						<#if prolist?? && (prolist?size > 0)>
 						<#list prolist as pro>
-						<tr>					
-							<td>${pro.typename!""}</td>
-							<td><span>${pro.title!""}</span></td>
-							<td><span>${pro.pushuser!""}</span></td>
-							<td><span>${pro.applytime!""}</span></td>
-							<td><span>${pro.harry!""}</span></td>
-							<td><span class="label ${pro.statuscolor}">${pro.statusname!""}</span></td>
-							<td> <a href="auditing?id=${pro.proid!""}" class="label sheding"><span
-									class="glyphicon glyphicon-zoom-in"></span> 审核</a> 
-								 <a href="particular?id=${pro.proid!""}&typename=${pro.typename!""}" class="label xiugai"><span
+						<tr>
+							<td>${(pro.typeNmae)!''}</td>
+							<td><span>${(pro.processName)!''}</span></td>
+							<td><span>${(pro.applyTime)!''}</span></td>
+							<td><span>${(pro.shenuser)!''}</span></td>
+							<#list typename as type>
+								<#if type.typeId==pro.deeply>
+								<td><span>${type.typeName}</span></td>
+								</#if>
+							</#list>
+							<#list statusname as status>
+								<#if status.statusId==pro.statusId>
+								<td><span class="label ${status.statusColor}">${status.statusName}</span></td>
+								</#if>
+							</#list>
+							
+							<td> <a href="particular?id=${pro.processId}&typename=${(pro.typeNmae)!''}" class="label xiugai"><span
 									class="glyphicon glyphicon-search"></span> 查看</a> 
-								
 							</td>
 						</tr>
 						</#list>
-						</#if>
 					</table>
 					</div>
-				</div>
+				
 				<!--盒子尾-->
 				<#include "/common/paging.ftl">
+				</div>
 			</div>
-			
 <script>
 		/* 分页插件按钮的点击事件 */
 		
@@ -67,7 +71,7 @@
 		   $(function(){
 			   $(".chazhao").click(function(){
 				   var con=$(".cha").val();
-				   $(".thistable").load("auditorar",{val:con});
+				   $(".thistable").load("applyleave",{val:con});
 			   });
 		});
 	
