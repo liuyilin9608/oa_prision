@@ -2,8 +2,8 @@
 <html >
 <head>
 <meta charset="UTF-8">
-<link href="images/favicon1.ico" rel="icon" type="image/x-icon"/>
-<link href="images/favicon1.ico" rel="shortcut icon" type="image/x-icon"/>
+<link href="images/jhlogo.png" rel="icon" type="image/x-icon"/>
+<link href="images/jhlogo.png" rel="shortcut icon" type="image/x-icon"/>
 <title>监狱自动化办公系统</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/login.css">
@@ -97,7 +97,7 @@
   <div class="cont_centrar" style="top:5%;">
     <div class="cont_login">
       <div class="cont_forms cont_forms_active_login" style="height: 480px;width: 400px;border-radius: 15px;">
-        <div class="cont_img_back_"> <img src="images/prision.jpg" alt="背景图片" /> </div>
+        <div class="cont_img_back_"> <img src="images/loginpic.jpg" alt="背景图片" /> </div>
         <form action="logins" method="post" onsubmit="return check();">
         <div class="cont_form_login" style="display: block;opacity: 1;width: 400px;">
         	 <div class="alert alert-danger alert-dismissible"  role="alert" style="position: absolute;padding: 11px;display: none">

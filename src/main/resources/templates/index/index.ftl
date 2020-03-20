@@ -5,9 +5,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1,
 maximum-scale=1, user-scalable=no">
-<link href="images/favicon1.ico" rel="icon" type="image/x-icon"/>
-<link href="images/favicon1.ico" rel="shortcut icon" type="image/x-icon"/>
-<title>控制面板主页</title>
+<link href="images/jhlogo.png" rel="icon" type="image/x-icon"/>
+<link href="images/jhlogo.png" rel="shortcut icon" type="image/x-icon"/>
+<title>监狱自动化办公系统</title>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
 <script type="text/javascript" src="easyui/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
