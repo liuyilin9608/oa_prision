@@ -31,7 +31,7 @@
 <div class="head-show" style="position: relative; height: 88px;">
     <ol class="breadcrumb pull-right"
         style="float: right; margin-top: 20px; background: transparent;">
-        <li><a href="#"> <span class="glyphicon glyphicon-home"></span>
+        <li><a href="##"> <span class="glyphicon glyphicon-home"></span>
                 首页
             </a></li>
         <li class="active">控制面板</li>
@@ -82,7 +82,7 @@
                                 <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="morelog">历史记录</a></li>
+                                <li><a href="morelogrecord">历史记录</a></li>
                             </ul>
                         </div>
                         <a data-toggle="collapse">

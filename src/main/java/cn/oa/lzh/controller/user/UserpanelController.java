@@ -90,6 +90,7 @@ public class UserpanelController {
 		Page<Notepaper> list=ndao.findByUserIdOrderByCreateTimeDesc(user,pa);
 		List<Notepaper> notepaperlist=list.getContent();
 		model.addAttribute("user", user);
+		model.addAttribute("worktype", user.getWorkType());
 		model.addAttribute("deptname", deptname);
 		model.addAttribute("positionname", positionname);
 		model.addAttribute("notepaperlist", notepaperlist);

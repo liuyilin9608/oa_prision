@@ -23,8 +23,10 @@ public class UserLog {
 	@Column(name = "ip_addr")
 	private String ipAddr;	//ip地址
 	
+	@Column(name = "title")
 	private String title;	//操作菜单名字
 	
+	@Column(name = "url")
 	private String url;		//操作菜单url
 	
 	@Column(name = "log_time")

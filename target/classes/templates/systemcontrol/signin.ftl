@@ -78,7 +78,6 @@
 </#if>
 <script>
 	$(".attendce").on('click',function(){
-		confirm("您确定签到吗");
 		$("#refresh").load('singin');
 	});
     

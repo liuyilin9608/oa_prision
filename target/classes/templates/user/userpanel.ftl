@@ -166,6 +166,15 @@
                 <p class="text-muted">
                     <span id="ctl00_cphMain_lblNote">${(user.userSign)!''}</span>
                 </p>
+                <hr/>
+                <strong><i class="glyphicon glyphicon-time"></i> 上班时间</strong>
+                <p class="text-muted">
+                    <#if worktype == "白班">
+					<span id="ctl00_cphMain_lblNote">${(worktype)!''}: 8:00——17:00</span>
+				    <#else>
+					<span id="ctl00_cphMain_lblNote">${(worktype)!''}: 18:00——7:00</span>
+				    </#if>
+                </p>
             </div>
         </div>
     </div>
