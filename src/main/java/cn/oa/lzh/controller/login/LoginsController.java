@@ -3,14 +3,13 @@ package cn.oa.lzh.controller.login;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +36,8 @@ public class LoginsController {
 	UserLongRecordService ulService;
 	//类似token  
 	public static final String CAPTCHA_KEY = "session_captcha";
-
+    public static final int errorCishi=1;
+	public static final Map<String,Object> loginErrMap = new HashMap<String,Object>();
 	private Random rnd = new Random();
 	
 	/**
@@ -67,14 +67,20 @@ public class LoginsController {
 		String userName=req.getParameter("userName").trim();
 		String password=req.getParameter("password");
 		String ca=req.getParameter("code").toLowerCase();
-		System.out.println("ca:" + ca);
 		String sesionCode = (String) req.getSession().getAttribute(CAPTCHA_KEY);
-		System.out.println(sesionCode);
+		Map <String,Object> map=new HashMap<>();
+		//新加需求秘密错误5次锁定10分钟
 		model.addAttribute("userName", userName);
-		System.out.println("sbbbbb");
+		JSONObject errMessage = (JSONObject)loginErrMap.get("err"+userName);
+
+		if(errMessage!=null&&"4".equals(errMessage.get("cishu").toString())){
+			model.addAttribute("errormess", "账户被锁定!请十分钟后再试");
+			req.setAttribute("errormess","验证码输入错误!请十分钟后再试");
+			return "login/login";
+		}
+		loginErrMap.get("err"+userName);
 		if(!ca.equals(sesionCode.toLowerCase())){
-			System.out.println("sbbbbb");
-			System.out.println("验证码输入错误!");
+
 			model.addAttribute("errormess", "验证码输入错误!");
 			req.setAttribute("errormess","验证码输入错误!");
 			return "login/login";
@@ -82,13 +88,13 @@ public class LoginsController {
 		/*
 		 * 将用户名分开查找；用户名或者电话号码；
 		 * */
-		System.out.println("sbbbbbbbbb");
 		User user=uDao.findOneUser(userName, password);
-		System.out.println(user.getUserId());
 		if(Objects.isNull(user)){
-			System.out.println(user);
-			System.out.println("账号或密码错误!");
-			model.addAttribute("errormess", "账号或密码错误!");
+			if(checkCishubyName(userName)==true){
+				model.addAttribute("errormess", "账号或密码错误!");
+				return "login/login";
+			}
+			model.addAttribute("errormess", "账户被锁定10分钟");
 			return "login/login";
 		}
 		System.out.println("是否被锁："+user.getIsLock());
@@ -117,7 +123,39 @@ public class LoginsController {
 		}
 		return "redirect:/index";
 	}
-	
+	public boolean checkCishubyName(String userName){
+		JSONObject errMessage = (JSONObject)loginErrMap.get("err"+userName);
+		if(errMessage == null){
+			errMessage = new JSONObject();
+			errMessage.put("cishu",1);
+			errMessage.put("time",new Date());
+			loginErrMap.put("err"+userName,errMessage);
+
+		}else {
+			Date thatTime = (Date) errMessage.get("time");
+			long currentTime = System.currentTimeMillis();
+			long diff = (currentTime - thatTime.getTime()) / 1000 / 60;
+			if (diff > 10) {
+				errMessage = new JSONObject();
+				errMessage.put("cishu", 1);
+				errMessage.put("time", new Date());
+				loginErrMap.put("err" + userName, errMessage);
+
+			} else {
+				int cishu = (Integer) errMessage.get("cishu");
+				if (cishu == 4) {
+					return false;
+				} else {
+					cishu++;
+					errMessage.put("cishu", cishu);
+					errMessage.put("time", new Date());
+
+				}
+			}
+
+		}
+		return true;
+	}
 	@RequestMapping("handlehas")
 	public String handleHas(HttpSession session){
 		if(!StringUtils.isEmpty(session.getAttribute("thisuser"))){
